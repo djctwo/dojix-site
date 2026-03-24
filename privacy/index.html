@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Dojix</title>
+    <style>
+        :root { --bg:#0a0a0f;--surface:#121217;--card:#191c24;--border:rgba(255,255,255,0.08);--text:#e8e8ed;--muted:#8b8b9e;--accent:#4a9eff; }
+        * { margin:0;padding:0;box-sizing:border-box; }
+        body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased; }
+        .container { max-width:720px;margin:0 auto;padding:0 24px; }
+        nav { padding:20px 0;border-bottom:1px solid var(--border);background:rgba(10,10,15,0.9);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100; }
+        nav .nav-inner { max-width:1080px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center; }
+        .logo { font-size:22px;font-weight:700;letter-spacing:-0.5px;text-decoration:none;color:var(--text); }
+        .logo span { color:var(--accent); }
+        nav a.back { color:var(--muted);text-decoration:none;font-size:14px; }
+        nav a.back:hover { color:var(--text); }
+        h1 { font-size:36px;font-weight:700;margin:60px 0 8px;letter-spacing:-1px; }
+        .updated { color:var(--muted);font-size:14px;margin-bottom:40px; }
+        h2 { font-size:22px;font-weight:600;margin:40px 0 12px;color:var(--accent); }
+        h3 { font-size:17px;font-weight:600;margin:24px 0 8px; }
+        p, li { font-size:15px;color:var(--muted);margin-bottom:12px; }
+        ul { padding-left:20px; }
+        li { margin-bottom:8px; }
+        strong { color:var(--text); }
+        table { width:100%;border-collapse:collapse;margin:16px 0;font-size:14px; }
+        th { text-align:left;padding:8px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:500; }
+        td { padding:8px;border-bottom:1px solid var(--border);color:var(--muted); }
+        a { color:var(--accent); }
+        hr { border:none;border-top:1px solid var(--border);margin:32px 0; }
+        footer { border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:13px;margin-top:80px; }
+        footer a { color:var(--muted);text-decoration:none;margin:0 12px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">dojix<span>.</span></a>
+            <a href="/" class="back">&larr; Back to Home</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: March 18, 2026</p>
+
+        <p>Dojix ("the App") is operated by Aaxis Holdings Group LLC ("we", "us", "our"). This Privacy Policy explains how we collect, use, and protect your information. We built Dojix with a privacy-first architecture: <strong>your trading data stays on your Mac, under your control.</strong></p>
+
+        <h2>1. Information We Collect</h2>
+
+        <h3>Information you provide:</h3>
+        <ul>
+            <li><strong>Trade data</strong> &mdash; Imported trades are stored exclusively in a local SQLite database on your Mac. This data never leaves your device unless you explicitly export it.</li>
+            <li><strong>API keys</strong> &mdash; If you use integrations (Anthropic, Twelve Data, OANDA), your keys are stored in the macOS Keychain and never transmitted to our servers.</li>
+            <li><strong>App lock password</strong> &mdash; Hashed using SHA-256 and stored locally. We never see your plaintext password.</li>
+            <li><strong>Subscription info</strong> &mdash; Payments processed by Paddle. We receive email, subscription status, and transaction IDs. We never see your credit card details.</li>
+        </ul>
+
+        <h3>Collected automatically:</h3>
+        <ul>
+            <li><strong>App version</strong> &mdash; Sent during update checks via Sparkle. No personal data included.</li>
+        </ul>
+
+        <h3>We do NOT collect:</h3>
+        <ul>
+            <li>Usage analytics, telemetry, or behavioral data</li>
+            <li>Screen visits, feature usage, or session duration</li>
+            <li>Crash reports</li>
+            <li>Cookies, pixels, or web tracking</li>
+            <li>IP addresses for tracking</li>
+            <li>We do not serve ads or sell your data</li>
+        </ul>
+
+        <h2>2. How We Use Your Information</h2>
+        <ul>
+            <li><strong>App functionality</strong> &mdash; All analytics operate on data stored locally on your device.</li>
+            <li><strong>Subscription management</strong> &mdash; Email and Paddle data verify your subscription status.</li>
+            <li><strong>Software updates</strong> &mdash; Sparkle checks for and delivers updates.</li>
+            <li><strong>Support</strong> &mdash; If you contact us, we use your info to resolve your issue.</li>
+        </ul>
+
+        <h2>3. Third-Party Services</h2>
+        <table>
+            <thead><tr><th>Service</th><th>Purpose</th><th>Data Sent</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Paddle</strong></td><td>Billing</td><td>Email, transaction data, device ID</td></tr>
+                <tr><td><strong>Anthropic Claude</strong></td><td>AI analysis</td><td>Trade data (direct, using your key)</td></tr>
+                <tr><td><strong>Twelve Data</strong></td><td>Live quotes</td><td>Market requests only (your key)</td></tr>
+                <tr><td><strong>OANDA</strong></td><td>Trade import</td><td>Trade history (your credentials)</td></tr>
+                <tr><td><strong>FairEconomy</strong></td><td>Calendar</td><td>No auth, no personal data</td></tr>
+                <tr><td><strong>Sparkle</strong></td><td>Updates</td><td>App version, macOS version</td></tr>
+            </tbody>
+        </table>
+        <p>When using your own API keys, data goes directly from your Mac to those providers. We don't proxy or store this traffic.</p>
+
+        <h2>4. Data Storage & Security</h2>
+        <ul>
+            <li>All data stored in a local SQLite database on your Mac</li>
+            <li>API keys in macOS Keychain (hardware-backed encryption)</li>
+            <li>App Lock with SHA-256 hashing and brute-force protection</li>
+            <li>All network connections use HTTPS/TLS</li>
+            <li>We have no ability to remotely access your data</li>
+        </ul>
+
+        <h2>5. Data Retention</h2>
+        <ul>
+            <li><strong>Local data</strong> &mdash; Stays on your Mac until you delete it. No retention limits.</li>
+            <li><strong>Subscription data</strong> &mdash; Paddle retains billing records as required by law.</li>
+        </ul>
+
+        <h2>6. Children's Privacy</h2>
+        <p>Dojix is designed for adult traders. Not intended for children under 16.</p>
+
+        <h2>7. Your Rights</h2>
+        <p>Your data is local, so you have direct control: access, export (CSV/PDF), edit, and delete at any time. For GDPR/CCPA rights related to Paddle subscription data, contact us or Paddle directly.</p>
+
+        <h2>8. Changes to This Policy</h2>
+        <p>We'll update the date at the top when changes occur. Significant changes will be noted in app update notes.</p>
+
+        <h2>9. Contact</h2>
+        <p><strong>Email:</strong> <a href="mailto:support@dojix.app">support@dojix.app</a><br>
+        <strong>Developer:</strong> Aaxis Holdings Group LLC</p>
+    </div>
+    <footer>
+        <a href="/">Home</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="mailto:support@dojix.app">Support</a>
+        <p style="margin-top:16px;">&copy; 2026 Aaxis Holdings Group LLC</p>
+    </footer>
+</body>
+</html>
