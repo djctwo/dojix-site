@@ -312,10 +312,31 @@
             .toc-pill { font-size: 12px; padding: 5px 12px; }
             .showcase-group.alt-bg { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
         }
+        /* Hamburger */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
+        .nav-links { display: flex; align-items: center; }
+
         @media (max-width: 600px) {
-            nav a { margin-left: 16px; font-size: 13px; }
             .page-header { padding: 48px 0 24px; }
             h1 { font-size: 32px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 12px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin-left: 0; font-size: 15px; }
+            .nav-links .btn-coming-soon { text-align: center; margin-top: 4px; }
+            nav .container { position: relative; }
         }
     </style>
 </head>
@@ -323,11 +344,14 @@
     <nav>
         <div class="container">
             <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></a>
-            <div>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
                 <a href="/features/" class="active">Features</a>
                 <a href="/#pricing">Pricing</a>
                 <a href="/privacy">Privacy</a>
-                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;margin-left:24px;">Coming Soon</a>
+                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;">Coming Soon</a>
             </div>
         </div>
     </nav>
