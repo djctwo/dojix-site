@@ -25,7 +25,7 @@
 - **Nav**: sticky, blurred background, hamburger at 600px breakpoint
 
 ## Current State
-- **Pre-launch**: All download buttons show "Coming Soon" with disabled styling
+- **Pre-launch**: Waiting on Paddle approval to go live. All CTA buttons say "Join Waitlist" → `mailto:waitlist@dojix.app`. When Paddle approves, swap mailto hrefs for real checkout/download URLs.
 - **Rollback tag**: `pre-critique-redesign` at commit `f0eaadd` (original site before warm gold redesign)
 - **SEO**: robots.txt, sitemap.xml, JSON-LD (Organization, SoftwareApplication, FAQPage), OG tags on all pages
 - **Mobile**: hamburger nav on homepage, features, support; privacy/terms have simple "Back to Home"
