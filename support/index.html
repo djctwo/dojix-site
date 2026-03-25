@@ -154,8 +154,8 @@
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
         .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
         .nav-links { display: flex; align-items: center; }
-        .btn-coming-soon { background: var(--card); color: var(--muted); border: 1px solid var(--border); cursor: default; }
-        .btn-coming-soon:hover { transform: none; background: var(--card); }
+        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
+        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
 
         @media (max-width: 600px) {
             .page-header { padding: 48px 0 32px; }
@@ -178,7 +178,7 @@
             }
             .nav-links.open { display: flex; }
             .nav-links a { margin-left: 0; font-size: 15px; }
-            .nav-links .btn-coming-soon { text-align: center; margin-top: 4px; }
+            .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
     </style>
@@ -194,7 +194,7 @@
                 <a href="/features/">Features</a>
                 <a href="/#pricing">Pricing</a>
                 <a href="/support/">Support</a>
-                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;">Coming Soon</a>
+                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
             </div>
         </div>
     </nav>

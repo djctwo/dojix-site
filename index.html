@@ -229,24 +229,9 @@
         .lightbox-close:hover { border-color: rgba(255,255,255,0.5); }
         .lightbox.active + .lightbox-close { display: flex; }
 
-        /* Coming soon state */
-        .btn-coming-soon {
-            background: var(--card);
-            color: var(--muted);
-            border: 1px solid var(--border);
-            cursor: default;
-            position: relative;
-        }
-        .btn-coming-soon:hover { transform: none; background: var(--card); }
-        .btn-coming-soon .soon-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--accent);
-            display: block;
-            margin-top: 2px;
-        }
+        /* Waitlist */
+        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
+        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
 
         @media (max-width: 768px) {
             .feature-grid { grid-template-columns: 1fr; }
@@ -278,7 +263,7 @@
             }
             .nav-links.open { display: flex; }
             .nav-links a { margin-left: 0; font-size: 15px; }
-            .nav-links .btn-coming-soon { text-align: center; margin-top: 4px; }
+            .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
     </style>
@@ -294,7 +279,7 @@
                 <a href="/features/">Features</a>
                 <a href="#pricing">Pricing</a>
                 <a href="/privacy">Privacy</a>
-                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;">Coming Soon</a>
+                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
             </div>
         </div>
     </nav>
@@ -305,7 +290,7 @@
             <h1>See your <span class="highlight">edge</span>.</h1>
             <p class="subtitle">Trade journal with 66 analytics, AI-powered edge detection, and live session intelligence. Built for forex traders who take their edge seriously.</p>
             <div class="cta-group">
-                <a class="btn btn-coming-soon">Coming Soon<span class="soon-tag">macOS</span></a>
+                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist">Join Waitlist</a>
                 <a href="#pricing" class="btn btn-secondary">View Pricing</a>
             </div>
             <div class="hero-image">
@@ -390,7 +375,7 @@
                         <li class="no">No AI analysis</li>
                         <li class="no">No export</li>
                     </ul>
-                    <a class="btn btn-coming-soon plan-btn">Coming Soon<span class="soon-tag">Free</span></a>
+                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Free&body=Add me to the Dojix waitlist (Free tier)." class="btn btn-secondary plan-btn">Join Waitlist</a>
                 </div>
 
                 <div class="price-card featured">
@@ -406,7 +391,7 @@
                         <li>12 months history</li>
                         <li>PDF export</li>
                     </ul>
-                    <a class="btn btn-coming-soon plan-btn">Coming Soon<span class="soon-tag">Pro</span></a>
+                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Pro&body=Add me to the Dojix waitlist (Pro)." class="btn btn-primary plan-btn">Join Waitlist</a>
                 </div>
 
                 <div class="price-card">
@@ -422,7 +407,7 @@
                         <li>PDF + CSV export</li>
                         <li>Priority support</li>
                     </ul>
-                    <a class="btn btn-coming-soon plan-btn">Coming Soon<span class="soon-tag">Pro+</span></a>
+                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Pro%2B&body=Add me to the Dojix waitlist (Pro+)." class="btn btn-secondary plan-btn">Join Waitlist</a>
                 </div>
             </div>
 
@@ -459,9 +444,10 @@
 
         <section class="section" id="download" style="text-align:center;padding-bottom:100px;">
             <div class="section-label">Get Started</div>
-            <h2>Dojix is coming soon</h2>
-            <p class="section-desc" style="margin:0 auto 32px;">Native macOS app. Requires macOS 14 Sonoma or later. Free tier included.</p>
-            <a class="btn btn-coming-soon" style="font-size:18px;padding:16px 48px;">Coming Soon<span class="soon-tag">macOS &middot; Universal Binary</span></a>
+            <h2>Be first in line</h2>
+            <p class="section-desc" style="margin:0 auto 32px;">Dojix launches soon. Native macOS app, requires Sonoma 14+. Free tier included.</p>
+            <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="font-size:18px;padding:16px 48px;">Join Waitlist</a>
+            <p style="margin-top:16px;font-size:13px;color:var(--muted);">Universal Binary (Apple Silicon + Intel)</p>
         </section>
     </div>
 

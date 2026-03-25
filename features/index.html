@@ -277,9 +277,8 @@
         .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
         .btn-secondary:hover { border-color: var(--accent); }
-        .btn-coming-soon { background: var(--card); color: var(--muted); border: 1px solid var(--border); cursor: default; }
-        .btn-coming-soon:hover { transform: none; background: var(--card); }
-        .btn-coming-soon .soon-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); display: block; margin-top: 2px; }
+        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
+        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
         .bottom-cta { text-align: center; padding: 60px 0 100px; }
         .bottom-cta h2 { font-size: 32px; margin-bottom: 16px; }
         .bottom-cta p { color: var(--muted); margin-bottom: 32px; }
@@ -335,7 +334,7 @@
             }
             .nav-links.open { display: flex; }
             .nav-links a { margin-left: 0; font-size: 15px; }
-            .nav-links .btn-coming-soon { text-align: center; margin-top: 4px; }
+            .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
     </style>
@@ -351,7 +350,7 @@
                 <a href="/features/" class="active">Features</a>
                 <a href="/#pricing">Pricing</a>
                 <a href="/privacy">Privacy</a>
-                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;">Coming Soon</a>
+                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
             </div>
         </div>
     </nav>
@@ -750,7 +749,7 @@
         <div class="bottom-cta">
             <h2>Ready to find your edge?</h2>
             <p>Free tier included. No credit card required.</p>
-            <a class="btn btn-coming-soon" style="font-size:18px;padding:16px 48px;">Coming Soon<span class="soon-tag">macOS &middot; Universal Binary</span></a>
+            <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="font-size:18px;padding:16px 48px;">Join Waitlist</a>
         </div>
     </div>
 
