@@ -166,6 +166,46 @@
         /* Divider */
         .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
+        /* Showcase groups — visual differentiation */
+        .showcase-group {
+            padding: 32px 0 16px;
+        }
+        .showcase-group.alt-bg {
+            background: var(--surface);
+            margin-left: -24px;
+            margin-right: -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .showcase-group.alt-bg .showcase.hero-showcase {
+            background: var(--card);
+        }
+        .group-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            padding: 24px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .group-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .group-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 0;
+        }
+
         /* Analytics deep dive */
         .analytics-section { padding: 80px 0; scroll-margin-top: 140px; }
         .analytics-section h2 { font-size: 32px; text-align: center; margin-bottom: 12px; }
@@ -237,6 +277,9 @@
         .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
         .btn-secondary:hover { border-color: var(--accent); }
+        .btn-coming-soon { background: var(--card); color: var(--muted); border: 1px solid var(--border); cursor: default; }
+        .btn-coming-soon:hover { transform: none; background: var(--card); }
+        .btn-coming-soon .soon-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); display: block; margin-top: 2px; }
         .bottom-cta { text-align: center; padding: 60px 0 100px; }
         .bottom-cta h2 { font-size: 32px; margin-bottom: 16px; }
         .bottom-cta p { color: var(--muted); margin-bottom: 32px; }
@@ -267,6 +310,7 @@
             .analytics-grid { grid-template-columns: 1fr; }
             .toc-pills { gap: 6px; }
             .toc-pill { font-size: 12px; padding: 5px 12px; }
+            .showcase-group.alt-bg { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
         }
         @media (max-width: 600px) {
             nav a { margin-left: 16px; font-size: 13px; }
@@ -283,7 +327,7 @@
                 <a href="/features/" class="active">Features</a>
                 <a href="/#pricing">Pricing</a>
                 <a href="/privacy">Privacy</a>
-                <a href="/#download" class="btn btn-primary" style="padding:8px 20px;font-size:14px;margin-left:24px;">Download</a>
+                <a class="btn btn-coming-soon" style="padding:8px 20px;font-size:14px;margin-left:24px;">Coming Soon</a>
             </div>
         </div>
     </nav>
@@ -327,6 +371,10 @@
     </div>
 
     <div class="container">
+        <!-- Group: Record & Analyze -->
+        <div class="showcase-group">
+        <div class="group-header">Record & Analyze <span class="group-count">01–02</span></div>
+
         <!-- 1. Journal -->
         <div class="showcase" id="journal">
             <div class="showcase-image">
@@ -344,8 +392,6 @@
                 </ul>
             </div>
         </div>
-
-        <hr class="divider">
 
         <!-- 2. Edge Report -->
         <div class="showcase reverse" id="edge">
@@ -365,7 +411,11 @@
             </div>
         </div>
 
-        <hr class="divider">
+        </div><!-- /group: Record & Analyze -->
+
+        <!-- Group: Live Intelligence -->
+        <div class="showcase-group alt-bg">
+        <div class="group-header">Live Intelligence <span class="group-count">03</span></div>
 
         <!-- 3. Pulse -->
         <div class="showcase" id="pulse">
@@ -385,7 +435,11 @@
             </div>
         </div>
 
-        <hr class="divider">
+        </div><!-- /group: Live Intelligence -->
+
+        <!-- Group: Exclusive Analytics -->
+        <div class="showcase-group">
+        <div class="group-header">Only in Dojix <span class="group-count">04–06</span></div>
 
         <!-- 4. Monte Carlo — HERO SHOWCASE -->
         <div class="showcase hero-showcase" id="montecarlo">
@@ -424,8 +478,6 @@
             </div>
         </div>
 
-        <hr class="divider">
-
         <!-- 6. Sessions — HERO SHOWCASE -->
         <div class="showcase hero-showcase reverse" id="sessions">
             <div class="showcase-image">
@@ -445,6 +497,12 @@
             </div>
         </div>
 
+        </div><!-- /group: Only in Dojix -->
+
+        <!-- Group: Deep Insights -->
+        <div class="showcase-group alt-bg">
+        <div class="group-header">Deep Analysis <span class="group-count">07–09</span></div>
+
         <!-- 7. Pairs -->
         <div class="showcase" id="pairs">
             <div class="showcase-image">
@@ -462,8 +520,6 @@
                 </ul>
             </div>
         </div>
-
-        <hr class="divider">
 
         <!-- 8. Behavioral -->
         <div class="showcase reverse" id="behavioral">
@@ -483,8 +539,6 @@
             </div>
         </div>
 
-        <hr class="divider">
-
         <!-- 9. Risk & Growth -->
         <div class="showcase" id="risk">
             <div class="showcase-image">
@@ -503,7 +557,11 @@
             </div>
         </div>
 
-        <hr class="divider">
+        </div><!-- /group: Deep Analysis -->
+
+        <!-- Group: Connect -->
+        <div class="showcase-group">
+        <div class="group-header">Connect <span class="group-count">10</span></div>
 
         <!-- 10. Import -->
         <div class="showcase reverse" id="import">
@@ -523,7 +581,7 @@
             </div>
         </div>
 
-        <hr class="divider">
+        </div><!-- /group: Connect -->
 
         <!-- Analytics deep dive -->
         <section class="analytics-section" id="analytics">
@@ -668,7 +726,7 @@
         <div class="bottom-cta">
             <h2>Ready to find your edge?</h2>
             <p>Free tier included. No credit card required.</p>
-            <a href="/#download" class="btn btn-primary" style="font-size:18px;padding:16px 48px;">Download for Mac</a>
+            <a class="btn btn-coming-soon" style="font-size:18px;padding:16px 48px;">Coming Soon<span class="soon-tag">macOS &middot; Universal Binary</span></a>
         </div>
     </div>
 
