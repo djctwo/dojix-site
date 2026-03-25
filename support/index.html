@@ -10,22 +10,27 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --surface: #121217;
-            --card: #191c24;
-            --border: rgba(255,255,255,0.08);
-            --text: #e8e8ed;
-            --muted: #8b8b9e;
-            --accent: #4a9eff;
-            --green: #34d399;
-            --red: #f87171;
-            --gold: #e8b44c;
+            --bg: #0e0d0b;
+            --surface: #141310;
+            --card: #1c1b18;
+            --border: rgba(255,220,160,0.08);
+            --border-strong: rgba(255,220,160,0.14);
+            --text: #e8e4dc;
+            --muted: #9a9488;
+            --accent: #e8b44c;
+            --accent-dim: rgba(232,180,76,0.1);
+            --green: #5cc98a;
+            --red: #e06050;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -38,7 +43,7 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: rgba(10,10,15,0.9);
+            background: rgba(14,13,11,0.92);
             backdrop-filter: blur(20px);
             z-index: 100;
         }
@@ -49,8 +54,8 @@
         nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         nav a:hover { color: var(--text); }
         .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover { background: #5aabff; transform: translateY(-1px); }
+        .btn-primary { background: var(--accent); color: #0e0d0b; }
+        .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
 
         .page-header { padding: 80px 0 48px; text-align: center; }
         .page-header h1 { font-size: 42px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 12px; }
@@ -107,11 +112,11 @@
         .faq-answer-inner a { color: var(--accent); text-decoration: none; }
         .faq-answer-inner a:hover { text-decoration: underline; }
         .faq-answer-inner code {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,220,160,0.06);
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 13px;
-            font-family: 'SF Mono', Menlo, monospace;
+            font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
         }
         .faq-answer-inner ul { margin: 8px 0 0 20px; }
         .faq-answer-inner li { margin-bottom: 4px; }

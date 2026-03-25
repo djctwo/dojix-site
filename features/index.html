@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features - Dojix Trade Journal for Mac</title>
     <meta name="description" content="Explore Dojix features: 66 analytics components, AI edge detection, trade grading, session intelligence, and 9 import platforms. See screenshots.">
+    <meta name="theme-color" content="#0e0d0b">
     <link rel="canonical" href="https://dojix.app/features/">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -15,22 +16,27 @@
     <meta property="og:title" content="Features - Dojix Trade Journal for Mac">
     <meta property="og:description" content="66 analytics, AI edge detection, live session intelligence. See Dojix in action.">
     <meta property="og:image" content="https://dojix.app/images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --surface: #121217;
-            --card: #191c24;
-            --border: rgba(255,255,255,0.08);
-            --text: #e8e8ed;
-            --muted: #8b8b9e;
-            --accent: #4a9eff;
-            --green: #34d399;
-            --red: #f87171;
-            --gold: #e8b44c;
+            --bg: #0e0d0b;
+            --surface: #141310;
+            --card: #1c1b18;
+            --border: rgba(255,220,160,0.08);
+            --border-strong: rgba(255,220,160,0.14);
+            --text: #e8e4dc;
+            --muted: #9a9488;
+            --accent: #e8b44c;
+            --accent-dim: rgba(232,180,76,0.1);
+            --green: #5cc98a;
+            --red: #e06050;
+            --blue: #6ba3d9;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -44,7 +50,7 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: rgba(10,10,15,0.9);
+            background: rgba(14,13,11,0.92);
             backdrop-filter: blur(20px);
             z-index: 100;
         }
@@ -62,6 +68,38 @@
         h1 { font-size: 44px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
         .page-subtitle { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 auto; }
 
+        /* Sticky feature TOC */
+        .feature-toc {
+            position: sticky;
+            top: 68px;
+            z-index: 50;
+            background: rgba(14,13,11,0.92);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .toc-pills {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 24px;
+        }
+        .toc-pill {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .toc-pill:hover { color: var(--text); border-color: var(--border-strong); }
+        .toc-pill.active { background: var(--accent); color: #0e0d0b; border-color: var(--accent); }
+
         /* Competitor callout badges */
         .exclusive-strip {
             display: flex;
@@ -74,8 +112,8 @@
         .exclusive-badge {
             display: inline-block;
             padding: 6px 14px;
-            background: rgba(52,211,153,0.08);
-            border: 1px solid rgba(52,211,153,0.2);
+            background: rgba(92,201,138,0.08);
+            border: 1px solid rgba(92,201,138,0.2);
             border-radius: 20px;
             font-size: 13px;
             font-weight: 500;
@@ -89,7 +127,7 @@
         }
 
         /* Screenshot showcases */
-        .showcase { display: flex; align-items: center; gap: 48px; padding: 80px 0; }
+        .showcase { display: flex; align-items: center; gap: 48px; padding: 80px 0; scroll-margin-top: 140px; }
         .showcase.reverse { flex-direction: row-reverse; }
         .showcase-text { flex: 1; min-width: 280px; }
         .showcase-text h2 { font-size: 28px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.5px; }
@@ -97,14 +135,39 @@
         .showcase-text ul { list-style: none; margin-top: 16px; }
         .showcase-text ul li { padding: 6px 0; font-size: 14px; color: var(--muted); }
         .showcase-text ul li::before { content: '\2713  '; color: var(--green); font-weight: 700; }
-        .showcase-image { flex: 1.4; border-radius: 10px; overflow: hidden; }
+        .showcase-image { flex: 1.4; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-strong); }
         .showcase-image img { width: 100%; height: auto; display: block; cursor: pointer; }
+
+        /* Hero showcase — top differentiators get bigger treatment */
+        .showcase.hero-showcase {
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 48px;
+            margin-bottom: 24px;
+            border-top: 2px solid var(--accent);
+        }
+        .showcase.hero-showcase .showcase-image { border-color: var(--accent); border-width: 1px; }
+        .hero-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(232,180,76,0.2);
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
 
         /* Divider */
         .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
         /* Analytics deep dive */
-        .analytics-section { padding: 80px 0; }
+        .analytics-section { padding: 80px 0; scroll-margin-top: 140px; }
         .analytics-section h2 { font-size: 32px; text-align: center; margin-bottom: 12px; }
         .analytics-desc { font-size: 16px; color: var(--muted); text-align: center; max-width: 500px; margin: 0 auto 48px; }
         .category-label {
@@ -118,18 +181,27 @@
         }
         .category-label:first-of-type { margin-top: 0; }
         .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-        .analytics-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; position: relative; }
+        .analytics-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+        .analytics-card:hover { border-color: var(--border-strong); }
         .analytics-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
         .analytics-card p { font-size: 13px; color: var(--muted); line-height: 1.4; }
         .tag-exclusive {
             display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--green);
-            background: rgba(52,211,153,0.1);
-            border: 1px solid rgba(52,211,153,0.2);
+            background: rgba(92,201,138,0.1);
+            border: 1px solid rgba(92,201,138,0.2);
             border-radius: 4px;
             padding: 2px 6px;
             margin-left: 6px;
@@ -137,7 +209,7 @@
         }
 
         /* Import platforms */
-        .import-section { padding: 60px 0 80px; text-align: center; }
+        .import-section { padding: 60px 0 80px; text-align: center; scroll-margin-top: 140px; }
         .import-section h2 { font-size: 28px; margin-bottom: 12px; }
         .import-section p { color: var(--muted); margin-bottom: 32px; }
         .platform-grid {
@@ -154,14 +226,16 @@
             border-radius: 8px;
             font-size: 14px;
             font-weight: 500;
+            transition: border-color 0.2s;
         }
+        .platform-badge:hover { border-color: var(--border-strong); }
         .import-note { font-size: 14px; color: var(--muted); }
 
         /* CTA */
         .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover { background: #5aabff; transform: translateY(-1px); }
-        .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+        .btn-primary { background: var(--accent); color: #0e0d0b; }
+        .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
         .btn-secondary:hover { border-color: var(--accent); }
         .bottom-cta { text-align: center; padding: 60px 0 100px; }
         .bottom-cta h2 { font-size: 32px; margin-bottom: 16px; }
@@ -177,10 +251,22 @@
         .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; }
         .lightbox.active { display: flex; }
         .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
+        .lightbox-close {
+            position: fixed; top: 20px; right: 24px; z-index: 1001;
+            background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+            color: #fff; font-size: 20px; width: 40px; height: 40px; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            transition: border-color 0.2s;
+        }
+        .lightbox-close:hover { border-color: rgba(255,255,255,0.5); }
+        .lightbox.active + .lightbox-close { display: flex; }
 
         @media (max-width: 768px) {
             .showcase, .showcase.reverse { flex-direction: column; }
+            .showcase.hero-showcase { padding: 32px 24px; }
             .analytics-grid { grid-template-columns: 1fr; }
+            .toc-pills { gap: 6px; }
+            .toc-pill { font-size: 12px; padding: 5px 12px; }
         }
         @media (max-width: 600px) {
             nav a { margin-left: 16px; font-size: 13px; }
@@ -196,7 +282,7 @@
             <div>
                 <a href="/features/" class="active">Features</a>
                 <a href="/#pricing">Pricing</a>
-                <a href="/support/">Support</a>
+                <a href="/privacy">Privacy</a>
                 <a href="/#download" class="btn btn-primary" style="padding:8px 20px;font-size:14px;margin-left:24px;">Download</a>
             </div>
         </div>
@@ -221,9 +307,28 @@
             <span class="exclusive-badge">Event Impact</span>
             <div class="exclusive-strip-label">Features no other trade journal has</div>
         </div>
+    </div>
 
+    <!-- Sticky TOC -->
+    <div class="feature-toc">
+        <div class="toc-pills">
+            <a href="#journal" class="toc-pill">Journal</a>
+            <a href="#edge" class="toc-pill">Edge Report</a>
+            <a href="#pulse" class="toc-pill">Pulse</a>
+            <a href="#montecarlo" class="toc-pill">Monte Carlo</a>
+            <a href="#timing" class="toc-pill">Timing</a>
+            <a href="#sessions" class="toc-pill">Sessions</a>
+            <a href="#pairs" class="toc-pill">Pairs</a>
+            <a href="#behavioral" class="toc-pill">Behavioral</a>
+            <a href="#risk" class="toc-pill">Risk</a>
+            <a href="#import" class="toc-pill">Import</a>
+            <a href="#analytics" class="toc-pill">All 66</a>
+        </div>
+    </div>
+
+    <div class="container">
         <!-- 1. Journal -->
-        <div class="showcase">
+        <div class="showcase" id="journal">
             <div class="showcase-image">
                 <img src="/images/feature-journal.jpg" alt="Trade journal showing 30 trades with A-F grades, cumulative P&L, session tags, and filter toolbar" loading="eager" onclick="openLightbox(this)">
             </div>
@@ -243,7 +348,7 @@
         <hr class="divider">
 
         <!-- 2. Edge Report -->
-        <div class="showcase reverse">
+        <div class="showcase reverse" id="edge">
             <div class="showcase-image">
                 <img src="/images/feature-edge.jpg" alt="Edge Report ranking top sessions and hours by profit with AI-powered recommendations" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -263,7 +368,7 @@
         <hr class="divider">
 
         <!-- 3. Pulse -->
-        <div class="showcase">
+        <div class="showcase" id="pulse">
             <div class="showcase-image">
                 <img src="/images/feature-pulse.jpg" alt="Pulse view with live session clock, economic calendar, danger zone alerts, and session intelligence" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -282,8 +387,27 @@
 
         <hr class="divider">
 
-        <!-- 4. Timing -->
-        <div class="showcase reverse">
+        <!-- 4. Monte Carlo — HERO SHOWCASE -->
+        <div class="showcase hero-showcase" id="montecarlo">
+            <div class="showcase-image">
+                <img src="/images/feature-montecarlo.jpg" alt="Monte Carlo simulation with 1,000 equity curves, exit efficiency gauge, and risk of ruin" loading="lazy" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <span class="hero-tag">No competitor has this</span>
+                <h2>Monte Carlo &amp; Risk of Ruin</h2>
+                <p>Run 1,000 randomized simulations of your trade history. Know your probability of hitting targets and your mathematical risk of blowing the account.</p>
+                <ul>
+                    <li>1,000 equity curve simulations with confidence bands</li>
+                    <li>Probability of profit, target hit, and max drawdown</li>
+                    <li>Risk of Ruin: Kelly criterion with probability gauge</li>
+                    <li>Exit efficiency: how much money you leave on the table</li>
+                    <li>Commission &amp; swap cost tracking by symbol</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Timing -->
+        <div class="showcase reverse" id="timing">
             <div class="showcase-image">
                 <img src="/images/feature-timing.jpg" alt="Timing tab with trade calendar, hourly P&L chart, day-of-week breakdown, and duration analysis" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -302,12 +426,13 @@
 
         <hr class="divider">
 
-        <!-- 5. Sessions -->
-        <div class="showcase">
+        <!-- 6. Sessions — HERO SHOWCASE -->
+        <div class="showcase hero-showcase reverse" id="sessions">
             <div class="showcase-image">
                 <img src="/images/feature-sessions.jpg" alt="Sessions tab with session heatmap, kill zone optimizer, and sequence analysis" loading="lazy" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
+                <span class="hero-tag">No competitor has this</span>
                 <h2>Sessions &amp; Kill Zones</h2>
                 <p>Session-level edge analysis that no other journal offers. See P&L by session and hour, find your optimal kill zones, and understand your win/loss streaks.</p>
                 <ul>
@@ -320,10 +445,8 @@
             </div>
         </div>
 
-        <hr class="divider">
-
-        <!-- 6. Pairs -->
-        <div class="showcase reverse">
+        <!-- 7. Pairs -->
+        <div class="showcase" id="pairs">
             <div class="showcase-image">
                 <img src="/images/feature-pairs.jpg" alt="Pairs tab with win/loss distribution, pair analytics, and directional edge analysis" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -342,28 +465,8 @@
 
         <hr class="divider">
 
-        <!-- 7. Monte Carlo & Risk -->
-        <div class="showcase">
-            <div class="showcase-image">
-                <img src="/images/feature-montecarlo.jpg" alt="Monte Carlo simulation with 1,000 equity curves, exit efficiency gauge, and risk of ruin" loading="lazy" onclick="openLightbox(this)">
-            </div>
-            <div class="showcase-text">
-                <h2>Monte Carlo &amp; Risk of Ruin</h2>
-                <p>Features no competitor has. Run 1,000 randomized simulations of your trade history. Know your probability of hitting targets and your mathematical risk of blowing the account.</p>
-                <ul>
-                    <li>1,000 equity curve simulations with confidence bands</li>
-                    <li>Probability of profit, target hit, and max drawdown</li>
-                    <li>Risk of Ruin: Kelly criterion with probability gauge</li>
-                    <li>Exit efficiency: how much money you leave on the table</li>
-                    <li>Commission &amp; swap cost tracking by symbol</li>
-                </ul>
-            </div>
-        </div>
-
-        <hr class="divider">
-
         <!-- 8. Behavioral -->
-        <div class="showcase reverse">
+        <div class="showcase reverse" id="behavioral">
             <div class="showcase-image">
                 <img src="/images/feature-analytics.jpg" alt="Discipline score A grade, trade grade distribution, consistency score, emotional P&L, and checklist compliance" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -383,7 +486,7 @@
         <hr class="divider">
 
         <!-- 9. Risk & Growth -->
-        <div class="showcase">
+        <div class="showcase" id="risk">
             <div class="showcase-image">
                 <img src="/images/feature-risk.jpg" alt="Risk tab with drawdown recovery, growth projections, position sizer, and benchmark comparison" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -403,7 +506,7 @@
         <hr class="divider">
 
         <!-- 10. Import -->
-        <div class="showcase reverse">
+        <div class="showcase reverse" id="import">
             <div class="showcase-image">
                 <img src="/images/feature-import.jpg" alt="Import view showing 9-platform auto-detection with drag-and-drop and OANDA API" loading="lazy" onclick="openLightbox(this)">
             </div>
@@ -423,12 +526,11 @@
         <hr class="divider">
 
         <!-- Analytics deep dive -->
-        <section class="analytics-section">
+        <section class="analytics-section" id="analytics">
             <div class="section-label" style="text-align:center;">Analytics</div>
             <h2>66 analytics. Zero fluff.</h2>
             <p class="analytics-desc">Every component earns its place by answering a question about your trading.</p>
 
-            <!-- Core Analytics -->
             <div class="category-label">Core Analytics</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -453,7 +555,6 @@
                 </div>
             </div>
 
-            <!-- Timing & Sessions -->
             <div class="category-label">Timing &amp; Sessions</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -474,7 +575,6 @@
                 </div>
             </div>
 
-            <!-- Behavioral -->
             <div class="category-label">Behavioral</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -495,7 +595,6 @@
                 </div>
             </div>
 
-            <!-- Risk & Projections -->
             <div class="category-label">Risk &amp; Projections</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -512,7 +611,6 @@
                 </div>
             </div>
 
-            <!-- AI & Intelligence -->
             <div class="category-label">AI &amp; Intelligence</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -529,7 +627,6 @@
                 </div>
             </div>
 
-            <!-- More -->
             <div class="category-label">And More</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
@@ -580,22 +677,23 @@
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/features/">Features</a>
-                <a href="/support/">Support & FAQ</a>
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
-                <a href="mailto:support@dojix.app">Contact</a>
+                <a href="mailto:support@dojix.app">Support</a>
             </div>
             <p>&copy; 2026 Aaxis Holdings Group LLC. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="">
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-label="Image preview">
+        <img id="lightbox-img" src="" alt="Enlarged screenshot">
     </div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image preview">&times;</button>
     <script>
         function openLightbox(el) {
             document.getElementById('lightbox-img').src = el.src;
+            document.getElementById('lightbox-img').alt = el.alt;
             document.getElementById('lightbox').classList.add('active');
         }
         function closeLightbox() {
@@ -604,6 +702,25 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
+
+        // Highlight active TOC pill on scroll
+        const tocPills = document.querySelectorAll('.toc-pill');
+        const sections = [];
+        tocPills.forEach(pill => {
+            const id = pill.getAttribute('href').replace('#', '');
+            const el = document.getElementById(id);
+            if (el) sections.push({ id, el, pill });
+        });
+        function updateActivePill() {
+            let current = sections[0];
+            for (const s of sections) {
+                if (s.el.getBoundingClientRect().top <= 160) current = s;
+            }
+            tocPills.forEach(p => p.classList.remove('active'));
+            if (current) current.pill.classList.add('active');
+        }
+        window.addEventListener('scroll', updateActivePill, { passive: true });
+        updateActivePill();
     </script>
 </body>
 </html>
