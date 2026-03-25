@@ -54,7 +54,7 @@
             z-index: 100;
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-decoration: none; color: var(--text); }
         .logo span { color: var(--accent); }
         .logo img { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; border-radius: 6px; }
         nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
@@ -82,22 +82,9 @@
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--accent); }
 
-        /* Screenshots */
+        /* Hero screenshot */
         .hero-image { margin-top: 60px; border-radius: 12px; overflow: hidden; }
         .hero-image img { width: 100%; height: auto; display: block; cursor: pointer; }
-        .app-screenshot { border-radius: 10px; overflow: hidden; }
-        .app-screenshot img { width: 100%; height: auto; display: block; cursor: pointer; }
-
-        /* Feature showcase: alternating text + image */
-        .feature-showcase { display: flex; align-items: center; gap: 48px; margin: 80px 0; }
-        .feature-showcase.reverse { flex-direction: row-reverse; }
-        .feature-showcase-text { flex: 1; min-width: 280px; }
-        .feature-showcase-text h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
-        .feature-showcase-text p { font-size: 16px; color: var(--muted); line-height: 1.6; }
-        .feature-showcase-image { flex: 1.5; }
-        @media (max-width: 768px) {
-            .feature-showcase, .feature-showcase.reverse { flex-direction: column; }
-        }
 
         /* Stats strip */
         .stats {
@@ -117,11 +104,13 @@
         h2 { font-size: 36px; font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
         .section-desc { font-size: 17px; color: var(--muted); max-width: 600px; margin-bottom: 48px; }
 
-        /* Feature highlights (compact cards below showcases) */
-        .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 48px; }
-        .highlight-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-        .highlight-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-        .highlight-card p { font-size: 13px; color: var(--muted); line-height: 1.4; }
+        /* Feature cards (text-only, homepage) */
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+        .feature-card .icon { font-size: 28px; margin-bottom: 14px; }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.3px; }
+        .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+        .features-cta { text-align: center; margin-top: 40px; }
 
         /* Pricing */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px; }
@@ -167,6 +156,9 @@
         .lightbox.active { display: flex; }
         .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
 
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 600px) {
             .stats { gap: 24px; }
             .hero { padding: 60px 0 40px; }
@@ -178,9 +170,9 @@
 <body>
     <nav>
         <div class="container">
-            <div class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></div>
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></a>
             <div>
-                <a href="#features">Features</a>
+                <a href="/features/">Features</a>
                 <a href="#pricing">Pricing</a>
                 <a href="/privacy">Privacy</a>
                 <a href="#download" class="btn btn-primary" style="padding:8px 20px;font-size:14px;margin-left:24px;">Download</a>
@@ -209,72 +201,46 @@
             <div class="stat"><div class="stat-value accent">AI</div><div class="stat-label">Edge Detection</div></div>
         </div>
 
-        <section class="section" id="features">
-            <div class="section-label">Features</div>
-            <h2>Everything you need to find your edge</h2>
-            <p class="section-desc">From auto-import to AI recommendations, Dojix turns your trade history into actionable intelligence.</p>
+        <section class="section">
+            <div class="section-label">Why Dojix</div>
+            <h2>Built for traders who want answers, not dashboards</h2>
+            <p class="section-desc">Most journals show you data. Dojix tells you what to do with it.</p>
 
-            <div class="feature-showcase">
-                <div class="feature-showcase-text">
-                    <h3>Every trade, graded A-F</h3>
-                    <p>Full trade journal with P&L, cumulative equity, R-multiples, session tags, and automatic grade scoring. Filter by pair, session, direction, or date range. Export to PDF or CSV.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">&#x1F4CA;</div>
+                    <h3>53 Analytics</h3>
+                    <p>Monte Carlo simulation, prop firm tracker, behavioral scoring, drawdown recovery, pair correlation, and 47 more. Every metric a serious trader needs.</p>
                 </div>
-                <div class="feature-showcase-image">
-                    <div class="app-screenshot">
-                        <img src="/images/feature-journal.jpg" alt="Trade journal with 30 trades, A-F grades, cumulative P&L, session colors, and filter toolbar" loading="lazy" onclick="openLightbox(this)">
-                    </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F916;</div>
+                    <h3>AI Edge Detection</h3>
+                    <p>Claude AI analyzes your trade history and gives you ranked recommendations with dollar impact. "You make $47/trade more in London overlap."</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F3AF;</div>
+                    <h3>Trade Grading A-F</h3>
+                    <p>Every trade is auto-scored on R-multiple, execution efficiency, timing discipline, and trade management. See exactly where you're sharp and where you're sloppy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x23F1;</div>
+                    <h3>Live Session Intelligence</h3>
+                    <p>Real-time session clock, economic calendar with danger zone alerts, and a personalized signal telling you whether NOW matches your best setups.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F4E5;</div>
+                    <h3>9 Import Platforms</h3>
+                    <p>MT5, MT4, cTrader, OANDA API, TradingView, Interactive Brokers, Thinkorswim, NinjaTrader. Drag-and-drop or auto-detect.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F512;</div>
+                    <h3>100% Local</h3>
+                    <p>Your trades never leave your Mac. No cloud. No servers. No telemetry. Encrypted database with AES-256. We can't see your data even if we wanted to.</p>
                 </div>
             </div>
 
-            <div class="feature-showcase reverse">
-                <div class="feature-showcase-text">
-                    <h3>Find where you make money</h3>
-                    <p>Edge Report ranks your top money-makers and money-losers by session, hour, day, and pair. Dollar amounts on everything. AI analysis gives you 3-5 ranked recommendations with dollar impact.</p>
-                </div>
-                <div class="feature-showcase-image">
-                    <div class="app-screenshot">
-                        <img src="/images/feature-edge.jpg" alt="Edge Report showing top sessions and hours ranked by profit with AI recommendations" loading="lazy" onclick="openLightbox(this)">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-showcase">
-                <div class="feature-showcase-text">
-                    <h3>Live session intelligence</h3>
-                    <p>Real-time session clock, economic calendar with high-impact event alerts, and a personalized edge signal telling you whether conditions match your best trading setups.</p>
-                </div>
-                <div class="feature-showcase-image">
-                    <div class="app-screenshot">
-                        <img src="/images/feature-pulse.jpg" alt="Pulse view with live London session clock, economic calendar showing 4 high-impact events, and session intelligence" loading="lazy" onclick="openLightbox(this)">
-                    </div>
-                </div>
-            </div>
-
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <h4>Monte Carlo Simulation</h4>
-                    <p>1,000 randomized equity curves with confidence bands. Know your probability of hitting targets.</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>Prop Firm Tracker</h4>
-                    <p>Account size, profit target, daily loss limit, max drawdown. Track your challenge in real time.</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>Behavioral Analytics</h4>
-                    <p>Discipline score across overtrading, revenge trading, tilt events, and lot size escalation.</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>9 Import Platforms</h4>
-                    <p>MT5, MT4, cTrader, OANDA API, TradingView, Interactive Brokers, Thinkorswim, NinjaTrader.</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>AI Edge Detection</h4>
-                    <p>Claude AI analyzes your trades and gives ranked recommendations. "You make $47/trade more in London."</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>Your Data Stays Local</h4>
-                    <p>Everything on your Mac. No cloud. No servers. No one sees your P&L but you.</p>
-                </div>
+            <div class="features-cta">
+                <a href="/features/" class="btn btn-secondary">See all features with screenshots &rarr;</a>
             </div>
         </section>
 
@@ -369,6 +335,7 @@
     <footer>
         <div class="container">
             <div class="footer-links">
+                <a href="/features/">Features</a>
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
                 <a href="mailto:support@dojix.app">Support</a>
