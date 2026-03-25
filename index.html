@@ -6,6 +6,21 @@
     <title>Dojix - Trade Journal & Edge Detection for Mac</title>
     <meta name="description" content="Native Mac trade journal with 53 analytics, AI-powered edge detection, and live session intelligence. Your data stays on your Mac.">
     <link rel="canonical" href="https://dojix.app">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dojix.app">
+    <meta property="og:title" content="Dojix - Trade Journal & Edge Detection for Mac">
+    <meta property="og:description" content="Native Mac trade journal with 53 analytics, AI-powered edge detection, and live session intelligence. Your data stays on your Mac.">
+    <meta property="og:image" content="https://dojix.app/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dojix - See your edge.">
+    <meta name="twitter:description" content="Trade journal with 53 analytics, AI edge detection, and live session intelligence for forex traders.">
+    <meta name="twitter:image" content="https://dojix.app/images/og-image.png">
     <style>
         :root {
             --bg: #0a0a0f;
@@ -88,6 +103,51 @@
         .btn-primary:hover { background: #5aabff; transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--accent); }
+
+        /* Hero screenshot */
+        .hero-image {
+            margin-top: 60px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 60px rgba(74,158,255,0.08);
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Feature screenshots */
+        .feature-screenshot {
+            margin-top: 48px;
+            margin-bottom: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+        }
+        .feature-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .feature-screenshot-label {
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 12px;
+            margin-bottom: 32px;
+        }
+
+        /* Nav icon */
+        .logo img {
+            width: 28px;
+            height: 28px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border-radius: 6px;
+        }
 
         /* Stats strip */
         .stats {
@@ -239,7 +299,7 @@
 <body>
     <nav>
         <div class="container">
-            <div class="logo">dojix<span>.</span></div>
+            <div class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></div>
             <div>
                 <a href="#features">Features</a>
                 <a href="#pricing">Pricing</a>
@@ -257,6 +317,9 @@
             <div class="cta-group">
                 <a href="#download" class="btn btn-primary">Download Free</a>
                 <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+            </div>
+            <div class="hero-image">
+                <img src="/images/hero-dashboard.jpg" alt="Dojix Dashboard — 53 analytics components, equity curves, session heatmaps, and metric cards" width="1472" height="902" loading="eager">
             </div>
         </section>
 
@@ -331,6 +394,21 @@
                     <p>Discipline score across overtrading, revenge trading, tilt events, and lot size escalation. A-F grading for your behavior.</p>
                 </div>
             </div>
+
+            <div class="feature-screenshot">
+                <img src="/images/screenshot-journal.jpg" alt="Dojix Trade Journal — every trade with P&L, grade, session, R-multiple, and cumulative P&L" width="1472" height="902" loading="lazy">
+            </div>
+            <p class="feature-screenshot-label">Trade Journal — every trade graded A-F with full metrics, filters, and search</p>
+
+            <div class="feature-screenshot">
+                <img src="/images/screenshot-edge.jpg" alt="Dojix Edge Report — top money makers and losers by session, hour, pair, and day" width="1472" height="902" loading="lazy">
+            </div>
+            <p class="feature-screenshot-label">Edge Report — where you make money and where you lose it, ranked by dollar impact</p>
+
+            <div class="feature-screenshot">
+                <img src="/images/screenshot-pulse.jpg" alt="Dojix Pulse — live session clock, forex quotes, economic calendar, and edge signals" width="1472" height="902" loading="lazy">
+            </div>
+            <p class="feature-screenshot-label">Pulse — live session intelligence, economic calendar, and personalized edge signals</p>
         </section>
 
         <section class="section" id="pricing">
