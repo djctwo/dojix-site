@@ -109,7 +109,6 @@
             margin-top: 60px;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--border);
             box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 60px rgba(74,158,255,0.08);
         }
         .hero-image img {
@@ -118,26 +117,46 @@
             display: block;
         }
 
-        /* Feature screenshots */
-        .feature-screenshot {
-            margin-top: 48px;
-            margin-bottom: 48px;
-            border-radius: 12px;
+        /* Feature showcase: alternating text + image rows */
+        .feature-showcase {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            margin: 64px 0;
+        }
+        .feature-showcase:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .feature-showcase-text {
+            flex: 1;
+            min-width: 280px;
+        }
+        .feature-showcase-text h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .feature-showcase-text p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .feature-showcase-image {
+            flex: 1.5;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid var(--border);
             box-shadow: 0 8px 40px rgba(0,0,0,0.4);
         }
-        .feature-screenshot img {
+        .feature-showcase-image img {
             width: 100%;
             height: auto;
             display: block;
         }
-        .feature-screenshot-label {
-            font-size: 14px;
-            color: var(--muted);
-            text-align: center;
-            margin-top: 12px;
-            margin-bottom: 32px;
+        @media (max-width: 768px) {
+            .feature-showcase, .feature-showcase:nth-child(even) {
+                flex-direction: column;
+            }
         }
 
         /* Nav icon */
@@ -395,20 +414,45 @@
                 </div>
             </div>
 
-            <div class="feature-screenshot">
-                <img src="/images/screenshot-journal.jpg" alt="Dojix Trade Journal — every trade with P&L, grade, session, R-multiple, and cumulative P&L" width="1472" height="902" loading="lazy">
+            <div class="feature-showcase">
+                <div class="feature-showcase-text">
+                    <h3>Every trade, graded A-F</h3>
+                    <p>Full trade journal with P&L, cumulative equity, R-multiples, session tags, and automatic grade scoring. Filter by pair, session, direction, or date range. Export to PDF or CSV.</p>
+                </div>
+                <div class="feature-showcase-image">
+                    <img src="/images/feature-journal.jpg" alt="Dojix trade journal table with grades, P&L, filters" loading="lazy">
+                </div>
             </div>
-            <p class="feature-screenshot-label">Trade Journal — every trade graded A-F with full metrics, filters, and search</p>
 
-            <div class="feature-screenshot">
-                <img src="/images/screenshot-edge.jpg" alt="Dojix Edge Report — top money makers and losers by session, hour, pair, and day" width="1472" height="902" loading="lazy">
+            <div class="feature-showcase">
+                <div class="feature-showcase-text">
+                    <h3>12 metrics at a glance</h3>
+                    <p>Win rate, profit factor, expectancy, Sharpe ratio, Calmar ratio, drawdown, R-multiple, streaks, duration — all computed in real time. Plus a prop firm tracker for challenge accounts.</p>
+                </div>
+                <div class="feature-showcase-image">
+                    <img src="/images/feature-metrics.jpg" alt="Dojix dashboard metric cards and prop firm tracker" loading="lazy">
+                </div>
             </div>
-            <p class="feature-screenshot-label">Edge Report — where you make money and where you lose it, ranked by dollar impact</p>
 
-            <div class="feature-screenshot">
-                <img src="/images/screenshot-pulse.jpg" alt="Dojix Pulse — live session clock, forex quotes, economic calendar, and edge signals" width="1472" height="902" loading="lazy">
+            <div class="feature-showcase">
+                <div class="feature-showcase-text">
+                    <h3>Find where you make money</h3>
+                    <p>Edge Report ranks your top money-makers and money-losers by session, hour, day, and pair. Dollar amounts on everything. AI analysis gives you 3-5 ranked recommendations.</p>
+                </div>
+                <div class="feature-showcase-image">
+                    <img src="/images/feature-edge.jpg" alt="Dojix edge report with session and hour rankings" loading="lazy">
+                </div>
             </div>
-            <p class="feature-screenshot-label">Pulse — live session intelligence, economic calendar, and personalized edge signals</p>
+
+            <div class="feature-showcase">
+                <div class="feature-showcase-text">
+                    <h3>Live session intelligence</h3>
+                    <p>Real-time session clock, economic calendar with high-impact event alerts, and a personalized edge signal telling you whether conditions match your best setups.</p>
+                </div>
+                <div class="feature-showcase-image">
+                    <img src="/images/feature-pulse.jpg" alt="Dojix pulse with session clock and economic calendar" loading="lazy">
+                </div>
+            </div>
         </section>
 
         <section class="section" id="pricing">
