@@ -56,14 +56,12 @@
         nav .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
+        .logo img { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; border-radius: 6px; }
         nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         nav a:hover { color: var(--text); }
 
         /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-        }
+        .hero { padding: 100px 0 80px; text-align: center; }
         .badge {
             display: inline-block;
             padding: 6px 16px;
@@ -74,110 +72,38 @@
             color: var(--accent);
             margin-bottom: 24px;
         }
-        h1 {
-            font-size: clamp(40px, 6vw, 64px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
+        h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
         h1 .highlight { color: var(--accent); }
-        .subtitle {
-            font-size: 20px;
-            color: var(--muted);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.5;
-        }
+        .subtitle { font-size: 20px; color: var(--muted); max-width: 600px; margin: 0 auto 40px; line-height: 1.5; }
         .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
         .btn-primary { background: var(--accent); color: #000; }
         .btn-primary:hover { background: #5aabff; transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--accent); }
 
-        /* Hero screenshot */
-        .hero-image {
-            margin-top: 60px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 60px rgba(74,158,255,0.08);
-        }
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        /* Screenshots */
+        .hero-image { margin-top: 60px; border-radius: 12px; overflow: hidden; }
+        .hero-image img { width: 100%; height: auto; display: block; cursor: pointer; }
+        .app-screenshot { border-radius: 10px; overflow: hidden; }
+        .app-screenshot img { width: 100%; height: auto; display: block; cursor: pointer; }
 
-        /* Feature showcase: alternating text + image rows */
-        .feature-showcase {
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            margin: 64px 0;
-        }
-        .feature-showcase:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        .feature-showcase-text {
-            flex: 1;
-            min-width: 280px;
-        }
-        .feature-showcase-text h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-        .feature-showcase-text p {
-            font-size: 16px;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-        .feature-showcase-image {
-            flex: 1.5;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-        }
-        .feature-showcase-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        /* Feature showcase: alternating text + image */
+        .feature-showcase { display: flex; align-items: center; gap: 48px; margin: 80px 0; }
+        .feature-showcase.reverse { flex-direction: row-reverse; }
+        .feature-showcase-text { flex: 1; min-width: 280px; }
+        .feature-showcase-text h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .feature-showcase-text p { font-size: 16px; color: var(--muted); line-height: 1.6; }
+        .feature-showcase-image { flex: 1.5; }
         @media (max-width: 768px) {
-            .feature-showcase, .feature-showcase:nth-child(even) {
-                flex-direction: column;
-            }
-        }
-
-        /* Nav icon */
-        .logo img {
-            width: 28px;
-            height: 28px;
-            vertical-align: middle;
-            margin-right: 8px;
-            border-radius: 6px;
+            .feature-showcase, .feature-showcase.reverse { flex-direction: column; }
         }
 
         /* Stats strip */
         .stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            padding: 48px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin: 0 0 80px;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 48px; padding: 48px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            margin: 0 0 80px; flex-wrap: wrap;
         }
         .stat { text-align: center; }
         .stat-value { font-size: 36px; font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -185,96 +111,38 @@
         .stat-value.green { color: var(--green); }
         .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-        /* Features */
+        /* Sections */
         .section { padding: 80px 0; }
-        .section-label {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-        h2 {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-        }
-        .section-desc {
-            font-size: 17px;
-            color: var(--muted);
-            max-width: 600px;
-            margin-bottom: 48px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .feature-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-        }
-        .feature-icon { font-size: 28px; margin-bottom: 12px; }
-        .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-        .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+        .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+        h2 { font-size: 36px; font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
+        .section-desc { font-size: 17px; color: var(--muted); max-width: 600px; margin-bottom: 48px; }
+
+        /* Feature highlights (compact cards below showcases) */
+        .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 48px; }
+        .highlight-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+        .highlight-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .highlight-card p { font-size: 13px; color: var(--muted); line-height: 1.4; }
 
         /* Pricing */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 48px;
-        }
-        .price-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 32px;
-            position: relative;
-        }
-        .price-card.featured {
-            border-color: var(--accent);
-            box-shadow: 0 0 40px rgba(74,158,255,0.1);
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px; }
+        .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px; position: relative; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(74,158,255,0.1); }
         .price-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: #000;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 16px;
-            border-radius: 10px;
+            content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: #000; font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 10px;
         }
         .plan-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
         .plan-price { font-size: 40px; font-weight: 700; margin: 16px 0 4px; }
         .plan-price span { font-size: 16px; color: var(--muted); font-weight: 400; }
         .plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
         .plan-features { list-style: none; margin-bottom: 28px; }
-        .plan-features li {
-            padding: 8px 0;
-            font-size: 14px;
-            color: var(--muted);
-            border-bottom: 1px solid var(--border);
-        }
+        .plan-features li { padding: 8px 0; font-size: 14px; color: var(--muted); border-bottom: 1px solid var(--border); }
         .plan-features li::before { content: '\2713  '; color: var(--green); font-weight: 700; }
         .plan-features li.no::before { content: '\2717  '; color: var(--red); }
         .plan-btn { display: block; text-align: center; width: 100%; }
 
-        /* Comparison strip */
-        .compare {
-            background: var(--surface);
-            border-radius: 14px;
-            padding: 40px;
-            margin-top: 48px;
-            border: 1px solid var(--border);
-        }
+        /* Comparison */
+        .compare { background: var(--surface); border-radius: 14px; padding: 40px; margin-top: 48px; border: 1px solid var(--border); }
         .compare h3 { font-size: 20px; margin-bottom: 24px; }
         .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
         .compare-table th { text-align: left; padding: 10px 12px; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--border); }
@@ -284,28 +152,20 @@
         .compare-table .price { color: var(--accent); font-weight: 600; }
 
         /* Privacy banner */
-        .privacy-banner {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 40px;
-            text-align: center;
-            margin: 48px 0;
-        }
+        .privacy-banner { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 40px; text-align: center; margin: 48px 0; }
         .privacy-banner h3 { font-size: 24px; margin-bottom: 12px; }
         .privacy-banner p { color: var(--muted); max-width: 600px; margin: 0 auto; }
 
         /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-            color: var(--muted);
-            font-size: 13px;
-        }
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
         footer a { color: var(--muted); text-decoration: none; margin: 0 12px; }
         footer a:hover { color: var(--text); }
         .footer-links { margin-bottom: 16px; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
 
         @media (max-width: 600px) {
             .stats { gap: 24px; }
@@ -338,27 +198,15 @@
                 <a href="#pricing" class="btn btn-secondary">View Pricing</a>
             </div>
             <div class="hero-image">
-                <img src="/images/hero-dashboard.jpg" alt="Dojix Dashboard — 53 analytics components, equity curves, session heatmaps, and metric cards" width="1472" height="902" loading="eager">
+                <img src="/images/hero-dashboard.jpg" alt="Dojix Dashboard with 12 metric cards, equity curve, prop firm tracker, and performance summary" width="1472" height="902" loading="eager" onclick="openLightbox(this)">
             </div>
         </section>
 
         <div class="stats">
-            <div class="stat">
-                <div class="stat-value accent">53</div>
-                <div class="stat-label">Analytics Components</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value green">9</div>
-                <div class="stat-label">Import Platforms</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">A-F</div>
-                <div class="stat-label">Trade Grading</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value accent">AI</div>
-                <div class="stat-label">Edge Detection</div>
-            </div>
+            <div class="stat"><div class="stat-value accent">53</div><div class="stat-label">Analytics Components</div></div>
+            <div class="stat"><div class="stat-value green">9</div><div class="stat-label">Import Platforms</div></div>
+            <div class="stat"><div class="stat-value">A-F</div><div class="stat-label">Trade Grading</div></div>
+            <div class="stat"><div class="stat-value accent">AI</div><div class="stat-label">Edge Detection</div></div>
         </div>
 
         <section class="section" id="features">
@@ -366,91 +214,66 @@
             <h2>Everything you need to find your edge</h2>
             <p class="section-desc">From auto-import to AI recommendations, Dojix turns your trade history into actionable intelligence.</p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#128202;</div>
-                    <h3>53 Analytics Components</h3>
-                    <p>Equity curves, session heatmaps, R-multiple distributions, Monte Carlo simulations, pair correlations, drawdown recovery, and 47 more.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#129302;</div>
-                    <h3>AI Edge Detection</h3>
-                    <p>Claude AI analyzes your trades and gives you ranked recommendations with dollar impact. "You make $47/trade more in London session."</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128229;</div>
-                    <h3>Auto-Import 9 Platforms</h3>
-                    <p>MT5, MT4, cTrader, OANDA API, TradingView, Interactive Brokers, Thinkorswim, NinjaTrader, and generic CSV.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#127919;</div>
-                    <h3>Trade Grading A-F</h3>
-                    <p>Every trade scored on R-multiple, execution efficiency, timing discipline, and trade management. See your grade distribution evolve.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128200;</div>
-                    <h3>Live Session Intelligence</h3>
-                    <p>Real-time forex quotes, economic calendar with danger zone alerts, currency strength bars, and edge signals.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128274;</div>
-                    <h3>Your Data Stays Local</h3>
-                    <p>Everything stored on your Mac in an encrypted Keychain. No cloud. No servers. No one sees your P&L but you.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#127922;</div>
-                    <h3>Monte Carlo Simulation</h3>
-                    <p>1,000 randomized equity curves with confidence bands. Know your probability of hitting targets — or blowing up.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128203;</div>
-                    <h3>Prop Firm Tracker</h3>
-                    <p>Configure account size, profit target, daily loss limit, max drawdown. Track your challenge progress in real time.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#129504;</div>
-                    <h3>Behavioral Analytics</h3>
-                    <p>Discipline score across overtrading, revenge trading, tilt events, and lot size escalation. A-F grading for your behavior.</p>
-                </div>
-            </div>
-
             <div class="feature-showcase">
                 <div class="feature-showcase-text">
                     <h3>Every trade, graded A-F</h3>
                     <p>Full trade journal with P&L, cumulative equity, R-multiples, session tags, and automatic grade scoring. Filter by pair, session, direction, or date range. Export to PDF or CSV.</p>
                 </div>
                 <div class="feature-showcase-image">
-                    <img src="/images/feature-journal.jpg" alt="Dojix trade journal table with grades, P&L, filters" loading="lazy">
+                    <div class="app-screenshot">
+                        <img src="/images/feature-journal.jpg" alt="Trade journal with 30 trades, A-F grades, cumulative P&L, session colors, and filter toolbar" loading="lazy" onclick="openLightbox(this)">
+                    </div>
                 </div>
             </div>
 
-            <div class="feature-showcase">
-                <div class="feature-showcase-text">
-                    <h3>12 metrics at a glance</h3>
-                    <p>Win rate, profit factor, expectancy, Sharpe ratio, Calmar ratio, drawdown, R-multiple, streaks, duration — all computed in real time. Plus a prop firm tracker for challenge accounts.</p>
-                </div>
-                <div class="feature-showcase-image">
-                    <img src="/images/feature-metrics.jpg" alt="Dojix dashboard metric cards and prop firm tracker" loading="lazy">
-                </div>
-            </div>
-
-            <div class="feature-showcase">
+            <div class="feature-showcase reverse">
                 <div class="feature-showcase-text">
                     <h3>Find where you make money</h3>
-                    <p>Edge Report ranks your top money-makers and money-losers by session, hour, day, and pair. Dollar amounts on everything. AI analysis gives you 3-5 ranked recommendations.</p>
+                    <p>Edge Report ranks your top money-makers and money-losers by session, hour, day, and pair. Dollar amounts on everything. AI analysis gives you 3-5 ranked recommendations with dollar impact.</p>
                 </div>
                 <div class="feature-showcase-image">
-                    <img src="/images/feature-edge.jpg" alt="Dojix edge report with session and hour rankings" loading="lazy">
+                    <div class="app-screenshot">
+                        <img src="/images/feature-edge.jpg" alt="Edge Report showing top sessions and hours ranked by profit with AI recommendations" loading="lazy" onclick="openLightbox(this)">
+                    </div>
                 </div>
             </div>
 
             <div class="feature-showcase">
                 <div class="feature-showcase-text">
                     <h3>Live session intelligence</h3>
-                    <p>Real-time session clock, economic calendar with high-impact event alerts, and a personalized edge signal telling you whether conditions match your best setups.</p>
+                    <p>Real-time session clock, economic calendar with high-impact event alerts, and a personalized edge signal telling you whether conditions match your best trading setups.</p>
                 </div>
                 <div class="feature-showcase-image">
-                    <img src="/images/feature-pulse.jpg" alt="Dojix pulse with session clock and economic calendar" loading="lazy">
+                    <div class="app-screenshot">
+                        <img src="/images/feature-pulse.jpg" alt="Pulse view with live London session clock, economic calendar showing 4 high-impact events, and session intelligence" loading="lazy" onclick="openLightbox(this)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <h4>Monte Carlo Simulation</h4>
+                    <p>1,000 randomized equity curves with confidence bands. Know your probability of hitting targets.</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Prop Firm Tracker</h4>
+                    <p>Account size, profit target, daily loss limit, max drawdown. Track your challenge in real time.</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Behavioral Analytics</h4>
+                    <p>Discipline score across overtrading, revenge trading, tilt events, and lot size escalation.</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>9 Import Platforms</h4>
+                    <p>MT5, MT4, cTrader, OANDA API, TradingView, Interactive Brokers, Thinkorswim, NinjaTrader.</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>AI Edge Detection</h4>
+                    <p>Claude AI analyzes your trades and gives ranked recommendations. "You make $47/trade more in London."</p>
+                </div>
+                <div class="highlight-card">
+                    <h4>Your Data Stays Local</h4>
+                    <p>Everything on your Mac. No cloud. No servers. No one sees your P&L but you.</p>
                 </div>
             </div>
         </section>
@@ -514,13 +337,7 @@
                 <h3>How Dojix compares</h3>
                 <table class="compare-table">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>Dojix Pro+</th>
-                            <th>TraderSync</th>
-                            <th>Tradervue</th>
-                            <th>Edgewonk</th>
-                        </tr>
+                        <tr><th></th><th>Dojix Pro+</th><th>TraderSync</th><th>Tradervue</th><th>Edgewonk</th></tr>
                     </thead>
                     <tbody>
                         <tr><td>Price</td><td class="price">$29/mo</td><td>$80/mo</td><td>$50/mo</td><td>$169 once</td></tr>
@@ -559,5 +376,22 @@
             <p>&copy; 2026 Aaxis Holdings Group LLC. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    <script>
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 </body>
 </html>
