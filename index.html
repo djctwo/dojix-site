@@ -24,6 +24,7 @@
     <meta name="twitter:image" content="https://dojix.app/images/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="/images/hero-dashboard.jpg">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -36,6 +37,7 @@
             --muted: #9a9488;
             --accent: #e8b44c;
             --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
             --green: #5cc98a;
             --red: #e06050;
             --blue: #6ba3d9;
@@ -48,6 +50,11 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
         .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
         /* Nav */
@@ -84,8 +91,8 @@
         .subtitle { font-size: 20px; color: var(--muted); max-width: 600px; margin: 0 auto 40px; line-height: 1.5; }
         .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
         .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: #0e0d0b; }
-        .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
         .btn-secondary:hover { border-color: var(--accent); }
 
@@ -180,7 +187,7 @@
         .price-card.featured { border-color: var(--accent); }
         .price-card.featured::before {
             content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: #0e0d0b; font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 10px;
+            background: var(--accent); color: var(--bg); font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 10px;
         }
         .plan-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
         .plan-price { font-family: 'JetBrains Mono', monospace; font-size: 40px; font-weight: 500; margin: 16px 0 4px; }
@@ -222,7 +229,7 @@
         .lightbox-close {
             position: fixed; top: 20px; right: 24px; z-index: 1001;
             background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
-            color: #fff; font-size: 20px; width: 40px; height: 40px; cursor: pointer;
+            color: #fff; font-size: 20px; width: 44px; height: 44px; cursor: pointer;
             display: none; align-items: center; justify-content: center;
             transition: border-color 0.2s;
         }
@@ -230,13 +237,20 @@
         .lightbox.active + .lightbox-close { display: flex; }
 
         /* Waitlist */
-        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
-        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-waitlist { background: var(--accent); color: var(--bg); }
+        .btn-waitlist:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
+        @media (max-width: 1024px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-card.hero-card { grid-column: span 2; }
+            .compare { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .compare-table { min-width: 600px; }
+        }
         @media (max-width: 768px) {
             .feature-grid { grid-template-columns: 1fr; }
             .feature-card.hero-card { grid-column: span 1; flex-direction: column; }
             .hero-card .card-stat { font-size: 36px; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
         }
         /* Hamburger */
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -266,12 +280,16 @@
             .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="container">
-            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></a>
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
             <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
@@ -284,7 +302,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main id="main" class="container">
         <section class="hero">
             <div class="badge">Native Mac App &middot; Local-First &middot; Your Data, Your Mac</div>
             <h1>See your <span class="highlight">edge</span>.</h1>
@@ -414,6 +432,7 @@
             <div class="compare">
                 <h3>Dojix vs. everyone else</h3>
                 <table class="compare-table">
+                    <caption class="sr-only">Feature comparison: Dojix vs TraderSync, Tradervue, and Edgewonk</caption>
                     <thead>
                         <tr><th></th><th class="dojix-col">Dojix Pro+</th><th>TraderSync</th><th>Tradervue</th><th>Edgewonk</th></tr>
                     </thead>
@@ -449,15 +468,16 @@
             <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="font-size:18px;padding:16px 48px;">Join Waitlist</a>
             <p style="margin-top:16px;font-size:13px;color:var(--muted);">Universal Binary (Apple Silicon + Intel)</p>
         </section>
-    </div>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-links">
                 <a href="/features/">Features</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="mailto:support@dojix.app">Support</a>
+                <a href="/support/">FAQ</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="mailto:support@dojix.app">Contact</a>
             </div>
             <p>&copy; 2026 Aaxis Holdings Group LLC. All rights reserved.</p>
         </div>

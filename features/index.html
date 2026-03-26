@@ -18,6 +18,7 @@
     <meta property="og:image" content="https://dojix.app/images/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="/images/feature-journal.jpg">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,6 +31,7 @@
             --muted: #9a9488;
             --accent: #e8b44c;
             --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
             --green: #5cc98a;
             --red: #e06050;
             --blue: #6ba3d9;
@@ -42,6 +44,11 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
         .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
         /* Nav */
@@ -98,7 +105,7 @@
             white-space: nowrap;
         }
         .toc-pill:hover { color: var(--text); border-color: var(--border-strong); }
-        .toc-pill.active { background: var(--accent); color: #0e0d0b; border-color: var(--accent); }
+        .toc-pill.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
         /* Competitor callout badges */
         .exclusive-strip {
@@ -230,7 +237,7 @@
             transition: border-color 0.2s;
         }
         .analytics-card:hover { border-color: var(--border-strong); }
-        .analytics-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .analytics-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
         .analytics-card p { font-size: 13px; color: var(--muted); line-height: 1.4; }
         .tag-exclusive {
             display: inline-block;
@@ -273,12 +280,12 @@
 
         /* CTA */
         .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: #0e0d0b; }
-        .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
         .btn-secondary:hover { border-color: var(--accent); }
-        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
-        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-waitlist { background: var(--accent); color: var(--bg); }
+        .btn-waitlist:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .bottom-cta { text-align: center; padding: 60px 0 100px; }
         .bottom-cta h2 { font-size: 32px; margin-bottom: 16px; }
         .bottom-cta p { color: var(--muted); margin-bottom: 32px; }
@@ -296,13 +303,17 @@
         .lightbox-close {
             position: fixed; top: 20px; right: 24px; z-index: 1001;
             background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
-            color: #fff; font-size: 20px; width: 40px; height: 40px; cursor: pointer;
+            color: #fff; font-size: 20px; width: 44px; height: 44px; cursor: pointer;
             display: none; align-items: center; justify-content: center;
             transition: border-color 0.2s;
         }
         .lightbox-close:hover { border-color: rgba(255,255,255,0.5); }
         .lightbox.active + .lightbox-close { display: flex; }
 
+        @media (max-width: 1024px) {
+            .analytics-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-toc { top: 62px; }
+        }
         @media (max-width: 768px) {
             .showcase, .showcase.reverse { flex-direction: column; }
             .showcase.hero-showcase { padding: 32px 24px; }
@@ -310,6 +321,7 @@
             .toc-pills { gap: 6px; }
             .toc-pill { font-size: 12px; padding: 5px 12px; }
             .showcase-group.alt-bg { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+            .feature-toc { position: relative; top: 0; }
         }
         /* Hamburger */
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -337,12 +349,16 @@
             .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="container">
-            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></a>
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
             <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
@@ -355,7 +371,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main id="main" class="container">
         <div class="page-header">
             <div class="section-label">Features</div>
             <h1>See Dojix in action</h1>
@@ -374,7 +390,6 @@
             <span class="exclusive-badge">Event Impact</span>
             <div class="exclusive-strip-label">Features no other trade journal has</div>
         </div>
-    </div>
 
     <!-- Sticky TOC -->
     <div class="feature-toc">
@@ -393,7 +408,6 @@
         </div>
     </div>
 
-    <div class="container">
         <!-- Group: Record & Analyze -->
         <div class="showcase-group">
         <div class="group-header">Record & Analyze <span class="group-count">01–02</span></div>
@@ -401,7 +415,7 @@
         <!-- 1. Journal -->
         <div class="showcase" id="journal">
             <div class="showcase-image">
-                <img src="/images/feature-journal.jpg" alt="Trade journal showing 30 trades with A-F grades, cumulative P&L, session tags, and filter toolbar" loading="eager" onclick="openLightbox(this)">
+                <img src="/images/feature-journal.jpg" alt="Trade journal showing 30 trades with A-F grades, cumulative P&L, session tags, and filter toolbar" loading="eager" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Trade Journal</h2>
@@ -419,7 +433,7 @@
         <!-- 2. Edge Report -->
         <div class="showcase reverse" id="edge">
             <div class="showcase-image">
-                <img src="/images/feature-edge.jpg" alt="Edge Report ranking top sessions and hours by profit with AI-powered recommendations" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-edge.jpg" alt="Edge Report ranking top sessions and hours by profit with AI-powered recommendations" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Edge Report</h2>
@@ -443,7 +457,7 @@
         <!-- 3. Pulse -->
         <div class="showcase" id="pulse">
             <div class="showcase-image">
-                <img src="/images/feature-pulse.jpg" alt="Pulse view with live session clock, economic calendar, danger zone alerts, and session intelligence" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-pulse.jpg" alt="Pulse view with live session clock, economic calendar, danger zone alerts, and session intelligence" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Pulse &mdash; Live Session Intelligence</h2>
@@ -467,7 +481,7 @@
         <!-- 4. Monte Carlo — HERO SHOWCASE -->
         <div class="showcase hero-showcase" id="montecarlo">
             <div class="showcase-image">
-                <img src="/images/feature-montecarlo.jpg" alt="Monte Carlo simulation with 1,000 equity curves, exit efficiency gauge, and risk of ruin" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-montecarlo.jpg" alt="Monte Carlo simulation with 1,000 equity curves, exit efficiency gauge, and risk of ruin" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <span class="hero-tag">No competitor has this</span>
@@ -486,7 +500,7 @@
         <!-- 5. Timing -->
         <div class="showcase reverse" id="timing">
             <div class="showcase-image">
-                <img src="/images/feature-timing.jpg" alt="Timing tab with trade calendar, hourly P&L chart, day-of-week breakdown, and duration analysis" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-timing.jpg" alt="Timing tab with trade calendar, hourly P&L chart, day-of-week breakdown, and duration analysis" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Timing Analytics</h2>
@@ -504,7 +518,7 @@
         <!-- 6. Sessions — HERO SHOWCASE -->
         <div class="showcase hero-showcase reverse" id="sessions">
             <div class="showcase-image">
-                <img src="/images/feature-sessions.jpg" alt="Sessions tab with session heatmap, kill zone optimizer, and sequence analysis" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-sessions.jpg" alt="Sessions tab with session heatmap, kill zone optimizer, and sequence analysis" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <span class="hero-tag">No competitor has this</span>
@@ -529,7 +543,7 @@
         <!-- 7. Pairs -->
         <div class="showcase" id="pairs">
             <div class="showcase-image">
-                <img src="/images/feature-pairs.jpg" alt="Pairs tab with win/loss distribution, pair analytics, and directional edge analysis" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-pairs.jpg" alt="Pairs tab with win/loss distribution, pair analytics, and directional edge analysis" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Pair &amp; Instrument Analytics</h2>
@@ -547,7 +561,7 @@
         <!-- 8. Behavioral -->
         <div class="showcase reverse" id="behavioral">
             <div class="showcase-image">
-                <img src="/images/feature-analytics.jpg" alt="Discipline score A grade, trade grade distribution, consistency score, emotional P&L, and checklist compliance" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-analytics.jpg" alt="Discipline score A grade, trade grade distribution, consistency score, emotional P&L, and checklist compliance" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Behavioral Analytics</h2>
@@ -565,7 +579,7 @@
         <!-- 9. Risk & Growth -->
         <div class="showcase" id="risk">
             <div class="showcase-image">
-                <img src="/images/feature-risk.jpg" alt="Risk tab with drawdown recovery, growth projections, position sizer, and benchmark comparison" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-risk.jpg" alt="Risk tab with drawdown recovery, growth projections, position sizer, and benchmark comparison" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Risk &amp; Growth Projections</h2>
@@ -589,7 +603,7 @@
         <!-- 10. Import -->
         <div class="showcase reverse" id="import">
             <div class="showcase-image">
-                <img src="/images/feature-import.jpg" alt="Import view showing 9-platform auto-detection with drag-and-drop and OANDA API" loading="lazy" onclick="openLightbox(this)">
+                <img src="/images/feature-import.jpg" alt="Import view showing 9-platform auto-detection with drag-and-drop and OANDA API" loading="lazy" width="1600" height="1100" onclick="openLightbox(this)">
             </div>
             <div class="showcase-text">
                 <h2>Import from Anywhere</h2>
@@ -615,23 +629,23 @@
             <div class="category-label">Core Analytics</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>Equity Curve &amp; Returns</h4>
+                    <h3>Equity Curve &amp; Returns</h3>
                     <p>Interactive equity curve with drawdown overlay, monthly returns table, cumulative P&L tracking. The foundation of every analytics dashboard.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Sharpe / Calmar / Sortino</h4>
+                    <h3>Sharpe / Calmar / Sortino</h3>
                     <p>Risk-adjusted return ratios. Compare your performance to benchmarks. Know if your returns justify the risk you're taking.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Drawdown Recovery</h4>
+                    <h3>Drawdown Recovery</h3>
                     <p>Time underwater chart, top 10 drawdown events by depth, recovery phase analysis comparing your behavior during drawdown vs recovery.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Win/Loss Distribution</h4>
+                    <h3>Win/Loss Distribution</h3>
                     <p>Histogram of trade outcomes with R-multiple bucketing. See the shape of your edge and identify outlier winners and losers.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Commission &amp; Fee Tracking</h4>
+                    <h3>Commission &amp; Fee Tracking</h3>
                     <p>Total costs, cost per trade, cost by symbol, cost as % of gross profit. Know what your broker is really charging you.</p>
                 </div>
             </div>
@@ -639,19 +653,19 @@
             <div class="category-label">Timing &amp; Sessions</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>Session Heatmap</h4>
+                    <h3>Session Heatmap</h3>
                     <p>P&L by hour and day of week in a visual grid. Active hours only. Instantly see where your edge concentrates.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Kill Zone Optimizer <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Kill Zone Optimizer <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Groups adjacent profitable hours into named windows. Recommended and avoid windows with monthly P&L projection. No competitor has this.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Hourly P&L Chart</h4>
+                    <h3>Hourly P&L Chart</h3>
                     <p>Bar chart of cumulative P&L per trading hour (UTC). See at a glance which hours pay you and which cost you.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Day-of-Week Analysis</h4>
+                    <h3>Day-of-Week Analysis</h3>
                     <p>Win rate, profit factor, and average P&L broken down by Monday through Friday. Find your best and worst days.</p>
                 </div>
             </div>
@@ -659,19 +673,19 @@
             <div class="category-label">Behavioral</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>Discipline Score (A-F) <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Discipline Score (A-F) <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Composite score across 4 dimensions: overtrading detection, revenge trading, tilt events, and lot size escalation after losses.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Consistency Score <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Consistency Score <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Win rate stability over time, recovery speed from drawdowns, timing consistency. Are you getting better or worse?</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Emotional P&L Tracker</h4>
+                    <h3>Emotional P&L Tracker</h3>
                     <p>Tag trades with emotional state (Calm, Confident, Anxious, Frustrated, Revenge, FOMO, Bored). See average P&L per emotion.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Checklist Compliance</h4>
+                    <h3>Checklist Compliance</h3>
                     <p>Define your trading rules, check them per trade. See compliance rate, dollar impact of following vs breaking each rule.</p>
                 </div>
             </div>
@@ -679,15 +693,15 @@
             <div class="category-label">Risk &amp; Projections</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>Monte Carlo Simulation <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Monte Carlo Simulation <span class="tag-exclusive">Exclusive</span></h3>
                     <p>1,000 randomized equity curves with 5th/25th/median/75th/95th percentile confidence bands. Probability of hitting profit targets.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Risk of Ruin (Kelly) <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Risk of Ruin (Kelly) <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Kelly criterion calculation, visual risk gauge, actionable insights. Know your mathematical probability of blowing the account.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Growth Projections</h4>
+                    <h3>Growth Projections</h3>
                     <p>Project your account growth with current metrics, adjustable compounding assumptions, and target-based milestones.</p>
                 </div>
             </div>
@@ -695,15 +709,15 @@
             <div class="category-label">AI &amp; Intelligence</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>AI Edge Detection <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>AI Edge Detection <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Claude AI analyzes your entire trade history. Ranked recommendations with dollar impact per suggestion. "You make $47/trade more in London overlap."</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Event Impact Profiler <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>Event Impact Profiler <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Per-event-type performance: NFP, FOMC, CPI, ECB, BOE. Win rate, avg P&L, and TRADE/CAUTION/AVOID recommendation per event.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>What to Cut Advisor <span class="tag-exclusive">Exclusive</span></h4>
+                    <h3>What to Cut Advisor <span class="tag-exclusive">Exclusive</span></h3>
                     <p>Identifies what's costing you money and tells you exactly how much. Dollar amounts on every recommendation. Stop guessing what to fix.</p>
                 </div>
             </div>
@@ -711,15 +725,15 @@
             <div class="category-label">And More</div>
             <div class="analytics-grid">
                 <div class="analytics-card">
-                    <h4>Prop Firm Tracker</h4>
+                    <h3>Prop Firm Tracker</h3>
                     <p>Configure account size, profit target, daily loss limit, max drawdown. Real-time progress bars. Track FTMO, MFF, or any prop challenge.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>Playbook Catalog</h4>
+                    <h3>Playbook Catalog</h3>
                     <p>Tag-based setup tracking. Each setup: Keep, Review, or Drop. Per-setup metrics, P&L sparklines, best/worst session.</p>
                 </div>
                 <div class="analytics-card">
-                    <h4>+ 47 more components</h4>
+                    <h3>+ 47 more components</h3>
                     <p>Pair correlation matrix, exit efficiency, sequence analysis, directional edge, slippage analysis, MAE/MFE charts, edge decay, R-multiple distribution, benchmark comparison, and more.</p>
                 </div>
             </div>
@@ -751,16 +765,17 @@
             <p>Free tier included. No credit card required.</p>
             <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="font-size:18px;padding:16px 48px;">Join Waitlist</a>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/features/">Features</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="mailto:support@dojix.app">Support</a>
+                <a href="/support/">FAQ</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="mailto:support@dojix.app">Contact</a>
             </div>
             <p>&copy; 2026 Aaxis Holdings Group LLC. All rights reserved.</p>
         </div>

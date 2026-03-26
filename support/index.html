@@ -25,6 +25,7 @@
             --muted: #9a9488;
             --accent: #e8b44c;
             --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
             --green: #5cc98a;
             --red: #e06050;
         }
@@ -36,6 +37,11 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
         .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
         nav {
@@ -54,8 +60,8 @@
         nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         nav a:hover { color: var(--text); }
         .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: #0e0d0b; }
-        .btn-primary:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
         .page-header { padding: 80px 0 48px; text-align: center; }
         .page-header h1 { font-size: 42px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 12px; }
@@ -135,14 +141,14 @@
             display: inline-block;
             padding: 12px 28px;
             background: var(--accent);
-            color: #0e0d0b;
+            color: var(--bg);
             border-radius: 10px;
             font-weight: 600;
             text-decoration: none;
             font-size: 15px;
             transition: all 0.2s;
         }
-        .contact-card a.email-link:hover { background: #f0c060; transform: translateY(-1px); }
+        .contact-card a.email-link:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .response-time { font-size: 13px; color: var(--muted); margin-top: 12px; }
 
         footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
@@ -154,8 +160,8 @@
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
         .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
         .nav-links { display: flex; align-items: center; }
-        .btn-waitlist { background: var(--accent); color: #0e0d0b; }
-        .btn-waitlist:hover { background: #f0c060; transform: translateY(-1px); }
+        .btn-waitlist { background: var(--accent); color: var(--bg); }
+        .btn-waitlist:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
         @media (max-width: 600px) {
             .page-header { padding: 48px 0 32px; }
@@ -181,12 +187,16 @@
             .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
         }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="container">
-            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="Dojix" width="28" height="28">dojix<span>.</span></a>
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
             <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
@@ -199,7 +209,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main id="main" class="container">
         <div class="page-header">
             <h1>Support & FAQ</h1>
             <p>Answers to the most common questions. Can't find what you need? Email us below.</p>
@@ -210,14 +220,14 @@
             <div class="faq-section-title">Getting Started</div>
 
             <div class="faq-item">
-                <div class="faq-question">What is Dojix? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is Dojix? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix is a native Mac trade journal built for forex traders. It combines 66 analytics components, AI-powered edge detection, and live session intelligence in a single desktop app. Your data stays on your Mac — no cloud, no accounts required to start.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">How do I import my trades? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I import my trades? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix supports 9 platforms out of the box:
                     <ul>
@@ -233,21 +243,21 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">What does the free tier include? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What does the free tier include? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     The free tier includes manual trade logging (20 trades/month), basic analytics, confidence badges, session labels, and 30 days of history. No credit card required.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">What macOS version do I need? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What macOS version do I need? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix requires macOS 14 Sonoma or later. It runs natively on both Apple Silicon (M1/M2/M3/M4) and Intel Macs.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Is there a Windows or mobile version? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Is there a Windows or mobile version? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix is currently Mac-only. We built it as a native Mac app for the best performance and privacy. Windows and mobile versions are not planned at this time — building on one platform well is more important than being mediocre on three.
                 </div></div>
@@ -259,21 +269,21 @@
             <div class="faq-section-title">Importing & Data</div>
 
             <div class="faq-item">
-                <div class="faq-question">What is StrategyAnalytics (SA)? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is StrategyAnalytics (SA)? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     StrategyAnalytics is a custom MT5 script that enriches your trade data with pre-computed metrics like MAE, MFE, R-multiples, session tagging, bias alignment, and post-close continuation. When you import an SA CSV, Dojix gets access to all 32+ analytics fields automatically. You can also import standard MT5 exports — you just won't get the advanced pre-computed fields.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Will importing duplicate my trades? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Will importing duplicate my trades? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     No. Dojix uses the ticket number as a unique key. If you import the same file twice or import a file that overlaps with existing data, duplicates are automatically skipped.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">My CSV won't import. What should I check? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">My CSV won't import. What should I check? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Common fixes:
                     <ul>
@@ -287,7 +297,7 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Can I set up auto-import from MT5? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I set up auto-import from MT5? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Yes, on Pro and Pro+ plans. Go to Settings and set your MT5 Common Files path. Dojix will watch that folder and auto-import new SA CSV files as they appear. On Mac, MT5 runs under Wine, so the typical path is:<br>
                     <code>~/Library/Application Support/net.metaquotes.wine.metatrader5/drive_c/...</code><br>
@@ -296,7 +306,7 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Where is my data stored? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Where is my data stored? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Your data is stored locally in an encrypted SQLite database at <code>~/Library/Application Support/Dojix/</code>. The database is encrypted at rest using AES-256-GCM. Your data never leaves your Mac — there is no cloud sync, no telemetry, and no server-side storage.
                 </div></div>
@@ -308,7 +318,7 @@
             <div class="faq-section-title">Pricing & Subscriptions</div>
 
             <div class="faq-item">
-                <div class="faq-question">How much does Dojix cost? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How much does Dojix cost? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     <ul>
                         <li><strong>Free</strong> — 20 trades/month, basic analytics, 30-day history</li>
@@ -320,21 +330,21 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">How do I upgrade or cancel? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I upgrade or cancel? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Subscriptions are managed through Paddle. To upgrade, go to Settings in Dojix and click the upgrade button for your desired plan. To cancel, click "Manage Subscription" in Settings — this opens your Paddle portal where you can cancel anytime. Your access continues until the end of your billing period.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Can I get a refund? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I get a refund? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Yes. If you're not satisfied, email us within 30 days of your purchase and we'll issue a full refund, no questions asked.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Do you offer annual pricing? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Do you offer annual pricing? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Not yet. We're starting with monthly plans to keep things simple. Annual pricing with a discount may be added in the future.
                 </div></div>
@@ -346,7 +356,7 @@
             <div class="faq-section-title">Privacy & Security</div>
 
             <div class="faq-item">
-                <div class="faq-question">Does Dojix send my trade data anywhere? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Does Dojix send my trade data anywhere? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Your trade data stays on your Mac. The only network calls Dojix makes are:
                     <ul>
@@ -361,14 +371,14 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Is my database encrypted? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Is my database encrypted? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Yes. Your database is encrypted at rest using AES-256-GCM via Apple's CryptoKit framework. The encryption key is stored in your Mac's Keychain and is only accessible when your Mac is unlocked. Backups can also be encrypted with a password you choose.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Can I lock the app with a password? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I lock the app with a password? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Yes. Go to Settings &gt; Security and enable App Lock. You'll set an 8+ character password. The app locks automatically when you switch away from it and includes brute force protection with exponential backoff.
                 </div></div>
@@ -380,7 +390,7 @@
             <div class="faq-section-title">Features</div>
 
             <div class="faq-item">
-                <div class="faq-question">What analytics does Dojix include? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What analytics does Dojix include? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     66 analytics components organized across 8 categories:
                     <ul>
@@ -398,14 +408,14 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">How does the AI edge detection work? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How does the AI edge detection work? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix sends aggregated trade statistics (never individual trades) to Anthropic's Claude API. The AI analyzes patterns across your sessions, timing, pairs, and risk metrics to generate 3-5 ranked recommendations in plain English with dollar impact estimates. For example: "Your London session GBPUSD longs have a 72% win rate with $8.40 average profit — consider increasing position size here." Pro users get weekly analysis; Pro+ users get real-time analysis.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">What live data sources are supported? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What live data sources are supported? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Five options for the Pulse tab:
                     <ul>
@@ -420,7 +430,7 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">What is Prop Firm mode? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is Prop Firm mode? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Pro+ includes a Prop Firm Tracker that monitors your account against funded account rules: account size, profit target, daily drawdown limit, and total drawdown limit. It shows real-time progress bars and warns you when approaching limits so you don't blow an evaluation or funded account.
                 </div></div>
@@ -432,7 +442,7 @@
             <div class="faq-section-title">Troubleshooting</div>
 
             <div class="faq-item">
-                <div class="faq-question">macOS says "Dojix can't be opened because it is from an unidentified developer" <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">macOS says "Dojix can't be opened because it is from an unidentified developer" <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     This shouldn't happen with the signed and notarized release. If you see this message:
                     <ul>
@@ -445,7 +455,7 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">The Pulse tab shows no live data <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">The Pulse tab shows no live data <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Check these:
                     <ul>
@@ -458,14 +468,14 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">How do I back up my data? <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I back up my data? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Go to Settings &gt; Data Management &gt; Create Backup. You can create a standard backup or an encrypted backup (password-protected). Backups are saved as <code>.dojix</code> or <code>.dojix-enc</code> files that you can store anywhere. To restore, use Settings &gt; Data Management &gt; Restore Backup.
                 </div></div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">The app is slow with lots of trades <span class="arrow">&#9662;</span></div>
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">The app is slow with lots of trades <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
                     Dojix is optimized for 10,000+ trades (bulk insert 1,000 trades in under 100ms, all queries under 10ms). If you're experiencing slowness, try restarting the app. If the issue persists, email us with your trade count and Mac model.
                 </div></div>
@@ -479,16 +489,16 @@
             <a href="mailto:support@dojix.app" class="email-link">Email support@dojix.app</a>
             <p class="response-time">We typically respond within 24 hours.</p>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/features/">Features</a>
-                <a href="/support/">Support</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
+                <a href="/support/">FAQ</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
                 <a href="mailto:support@dojix.app">Contact</a>
             </div>
             <p>&copy; 2026 Aaxis Holdings Group LLC. All rights reserved.</p>
@@ -496,27 +506,34 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.faq-question').forEach(function(q) {
-            q.addEventListener('click', function() {
-                var item = this.parentElement;
-                var answer = item.querySelector('.faq-answer');
-                var isOpen = item.classList.contains('open');
+        function toggleFaq(q) {
+            var item = q.parentElement;
+            var answer = item.querySelector('.faq-answer');
+            var isOpen = item.classList.contains('open');
 
-                // Close all other items
-                document.querySelectorAll('.faq-item.open').forEach(function(other) {
-                    if (other !== item) {
-                        other.classList.remove('open');
-                        other.querySelector('.faq-answer').style.maxHeight = null;
-                    }
-                });
-
-                if (isOpen) {
-                    item.classList.remove('open');
-                    answer.style.maxHeight = null;
-                } else {
-                    item.classList.add('open');
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
+            // Close all other items
+            document.querySelectorAll('.faq-item.open').forEach(function(other) {
+                if (other !== item) {
+                    other.classList.remove('open');
+                    other.querySelector('.faq-answer').style.maxHeight = null;
+                    other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 }
+            });
+
+            if (isOpen) {
+                item.classList.remove('open');
+                answer.style.maxHeight = null;
+                q.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                q.setAttribute('aria-expanded', 'true');
+            }
+        }
+        document.querySelectorAll('.faq-question').forEach(function(q) {
+            q.addEventListener('click', function() { toggleFaq(this); });
+            q.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(this); }
             });
         });
     </script>

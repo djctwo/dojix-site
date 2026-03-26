@@ -18,11 +18,13 @@
 | `404.html` | Custom 404 page |
 
 ## Design System
-- **Palette**: `--bg: #0e0d0b`, `--surface: #141310`, `--card: #1c1b18`, `--accent: #e8b44c` (warm gold), `--text: #e8e4dc`, `--muted: #9a9488`
+- **Palette**: `--bg: #0e0d0b`, `--surface: #141310`, `--card: #1c1b18`, `--accent: #e8b44c` (warm gold), `--accent-hover: #f0c060`, `--accent-dim: rgba(232,180,76,0.1)`, `--text: #e8e4dc`, `--muted: #9a9488`
 - **Typography**: DM Sans for all text, JetBrains Mono for numbers/stats/code/tags
 - **Cards**: `--card` bg with `--border` (8% opacity gold), hover to `--border-strong` (14%)
 - **Hero showcases**: gold top border, `--surface` bg, "No competitor has this" tag
 - **Nav**: sticky, blurred background, hamburger at 600px breakpoint
+- **Breakpoints**: 1024px (tablet), 768px (small tablet), 600px (mobile/hamburger)
+- **Accessibility**: skip links, `<main>` landmarks, `focus-visible`, `sr-only`, `prefers-reduced-motion`, ARIA on FAQ accordions
 
 ## Current State
 - **Pre-launch**: Waiting on Paddle approval to go live. All CTA buttons say "Join Waitlist" → `mailto:waitlist@dojix.app`. When Paddle approves, swap mailto hrefs for real checkout/download URLs.
@@ -34,6 +36,10 @@
 - **Pre-redesign score**: 20/40 (Nielsen's 10 Heuristics), 7 AI slop tells
 - **Post-redesign score**: 26/40, AI slop PASS, cognitive load reduced from 6/8 Critical to 3/8 Moderate
 - All 5 post-redesign critique issues fixed (P1: download buttons, P1: features grouping, P2: mobile nav, P2: 404 page, P3: comparison table)
+
+## Technical Audit History
+- **Audit score (2026-03-26)**: 10/20 → all 5 recommended actions completed (/harden, /normalize, /adapt, /optimize, /polish)
+- **Fixes applied**: focus-visible + skip links on all pages, `<main>` landmarks, FAQ ARIA keyboard support, heading hierarchy fix, table caption, logo alt="", `var(--bg)` token normalization, `--accent-hover` token, 1024px tablet breakpoint, image width/height for CLS, hero preloads, `prefers-reduced-motion`, lightbox 44px touch target, footer consistency, features page container nesting fix
 
 ## SEO Status
 ### Phase 1 (Done)
@@ -53,5 +59,7 @@
 - All pages use inline `<style>` blocks (no shared CSS file)
 - Images in `/images/` directory
 - Lightbox on pages with screenshots (features, homepage)
-- Footer consistent across pages: Home, Features, Privacy, Terms, Support
+- Footer consistent across pages: Home, Features, FAQ, Privacy, Terms, Contact
+- All colors tokenized in `:root` — never use raw hex outside `:root` definitions or `<meta>` tags
+- All feature images: 1600x1100, must include `width` and `height` attributes
 - Legal entity: Aaxis Holdings Group LLC
