@@ -197,7 +197,7 @@
     <nav>
         <div class="container">
             <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
-            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="nav-links">
@@ -339,7 +339,7 @@
             <div class="faq-item">
                 <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I get a refund? <span class="arrow">&#9662;</span></div>
                 <div class="faq-answer"><div class="faq-answer-inner">
-                    Yes. If you're not satisfied, email us within 30 days of your purchase and we'll issue a full refund, no questions asked.
+                    Yes. If you're not satisfied, email us within 14 days of your purchase and we'll issue a full refund, no questions asked.
                 </div></div>
             </div>
 
@@ -496,7 +496,7 @@
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/features/">Features</a>
-                <a href="/support/">FAQ</a>
+                <a href="/support/">Support</a>
                 <a href="/privacy">Privacy</a>
                 <a href="/terms">Terms</a>
                 <a href="mailto:support@dojix.app">Contact</a>
@@ -587,7 +587,7 @@
                 "name": "Can I get a refund?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. If you're not satisfied, email support@dojix.app within 30 days of your purchase and we'll issue a full refund, no questions asked."
+                    "text": "Yes. If you're not satisfied, email support@dojix.app within 14 days of your purchase and we'll issue a full refund, no questions asked."
                 }
             }
         ]
