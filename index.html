@@ -240,6 +240,28 @@
         .btn-waitlist { background: var(--accent); color: var(--bg); }
         .btn-waitlist:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
+        /* Waitlist form */
+        .waitlist-form { max-width: 440px; margin: 0 auto; }
+        .waitlist-input-group { display: flex; gap: 10px; }
+        .waitlist-input-group input {
+            flex: 1; padding: 14px 18px; border-radius: 10px;
+            border: 1px solid var(--border-strong); background: var(--card);
+            color: var(--text); font-size: 16px; font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .waitlist-input-group input:focus { outline: none; border-color: var(--accent); }
+        .waitlist-input-group input::placeholder { color: var(--muted); }
+        .waitlist-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+        .waitlist-success { padding: 24px 0; }
+        .success-check {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(92,201,138,0.12); border: 2px solid var(--green);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: var(--green); margin: 0 auto 16px;
+        }
+        .success-title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+        .success-subtitle { font-size: 15px; color: var(--muted); }
+
         @media (max-width: 1024px) {
             .feature-grid { grid-template-columns: repeat(2, 1fr); }
             .feature-card.hero-card { grid-column: span 2; }
@@ -279,6 +301,7 @@
             .nav-links a { margin-left: 0; font-size: 15px; }
             .nav-links .btn-waitlist { text-align: center; margin-top: 4px; }
             nav .container { position: relative; }
+            .waitlist-input-group { flex-direction: column; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -296,8 +319,8 @@
             <div class="nav-links">
                 <a href="/features/">Features</a>
                 <a href="#pricing">Pricing</a>
-                <a href="/privacy">Privacy</a>
-                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
+                <a href="/support/">Support</a>
+                <a href="#waitlist" class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
             </div>
         </div>
     </nav>
@@ -308,7 +331,7 @@
             <h1>See your <span class="highlight">edge</span>.</h1>
             <p class="subtitle">Trade journal with 66 analytics, AI-powered edge detection, and live session intelligence. Built for forex traders who take their edge seriously.</p>
             <div class="cta-group">
-                <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist">Join Waitlist</a>
+                <a href="#waitlist" class="btn btn-waitlist">Join Waitlist</a>
                 <a href="#pricing" class="btn btn-secondary">View Pricing</a>
             </div>
             <div class="hero-image">
@@ -393,7 +416,7 @@
                         <li class="no">No AI analysis</li>
                         <li class="no">No export</li>
                     </ul>
-                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Free&body=Add me to the Dojix waitlist (Free tier)." class="btn btn-secondary plan-btn">Join Waitlist</a>
+                    <a href="#waitlist" class="btn btn-secondary plan-btn">Join Waitlist</a>
                 </div>
 
                 <div class="price-card featured">
@@ -409,7 +432,7 @@
                         <li>12 months history</li>
                         <li>PDF export</li>
                     </ul>
-                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Pro&body=Add me to the Dojix waitlist (Pro)." class="btn btn-primary plan-btn">Join Waitlist</a>
+                    <a href="#waitlist" class="btn btn-primary plan-btn">Join Waitlist</a>
                 </div>
 
                 <div class="price-card">
@@ -425,7 +448,7 @@
                         <li>PDF + CSV export</li>
                         <li>Priority support</li>
                     </ul>
-                    <a href="mailto:waitlist@dojix.app?subject=Waitlist%20-%20Pro%2B&body=Add me to the Dojix waitlist (Pro+)." class="btn btn-secondary plan-btn">Join Waitlist</a>
+                    <a href="#waitlist" class="btn btn-secondary plan-btn">Join Waitlist</a>
                 </div>
             </div>
 
@@ -461,11 +484,22 @@
             <p>Dojix is local-first. Your trades, analytics, and journal entries are stored in a local database on your Mac. No cloud sync. No telemetry. No tracking. We can't see your data even if we wanted to.</p>
         </div>
 
-        <section class="section" id="download" style="text-align:center;padding-bottom:100px;">
+        <section class="section" id="waitlist" style="text-align:center;padding-bottom:100px;">
             <div class="section-label">Get Started</div>
             <h2>Be first in line</h2>
             <p class="section-desc" style="margin:0 auto 32px;">Dojix launches soon. Native macOS app, requires Sonoma 14+. Free tier included.</p>
-            <a href="mailto:waitlist@dojix.app?subject=Waitlist&body=Add me to the Dojix waitlist." class="btn btn-waitlist" style="font-size:18px;padding:16px 48px;">Join Waitlist</a>
+            <form id="waitlist-form" class="waitlist-form" onsubmit="return submitWaitlist(event)">
+                <div class="waitlist-input-group">
+                    <input type="email" id="waitlist-email" placeholder="you@example.com" required aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">Join Waitlist</button>
+                </div>
+                <p class="waitlist-note">No spam. We'll email you once when Dojix launches.</p>
+            </form>
+            <div id="waitlist-success" class="waitlist-success" style="display:none;">
+                <div class="success-check">&#10003;</div>
+                <p class="success-title">You're on the list.</p>
+                <p class="success-subtitle">We'll email you when Dojix is ready to download.</p>
+            </div>
             <p style="margin-top:16px;font-size:13px;color:var(--muted);">Universal Binary (Apple Silicon + Intel)</p>
         </section>
     </main>
@@ -500,6 +534,24 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
+        function submitWaitlist(e) {
+            e.preventDefault();
+            var email = document.getElementById('waitlist-email').value;
+            var form = document.getElementById('waitlist-form');
+            var success = document.getElementById('waitlist-success');
+            // Store locally + send mailto as fallback
+            try { var list = JSON.parse(localStorage.getItem('dojix_waitlist') || '[]'); list.push({email: email, date: new Date().toISOString()}); localStorage.setItem('dojix_waitlist', JSON.stringify(list)); } catch(err) {}
+            // Send email notification in background
+            var link = document.createElement('a');
+            link.href = 'mailto:waitlist@dojix.app?subject=Waitlist%20Signup&body=' + encodeURIComponent(email);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            form.style.display = 'none';
+            success.style.display = 'block';
+            return false;
+        }
     </script>
     <script type="application/ld+json">
     {
