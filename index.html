@@ -179,6 +179,9 @@
         .callout-banner h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
         .callout-banner p { font-size: 16px; color: var(--muted); line-height: 1.7; }
         .callout-banner strong { color: var(--text); }
+        .callout-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+        .callout-list li { font-size: 15px; color: var(--muted); line-height: 1.5; padding-left: 20px; position: relative; }
+        .callout-list li::before { content: '\2717'; color: var(--red); position: absolute; left: 0; font-weight: 700; }
 
         /* Pricing */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px; }
@@ -215,6 +218,15 @@
         .privacy-banner { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 40px; text-align: center; margin: 48px 0; }
         .privacy-banner h3 { font-size: 24px; margin-bottom: 12px; }
         .privacy-banner p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+        /* Trust strip */
+        .trust-strip {
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            padding: 32px 0; margin: 16px 0 0;
+            border-top: 1px solid var(--border);
+        }
+        .trust-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+        .trust-icon { font-size: 18px; }
 
         /* Footer */
         footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
@@ -273,6 +285,7 @@
             .feature-card.hero-card { grid-column: span 1; flex-direction: column; }
             .hero-card .card-stat { font-size: 36px; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+            .callout-list { grid-template-columns: 1fr; }
         }
         /* Hamburger */
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -394,7 +407,17 @@
 
         <div class="callout-banner">
             <h3>What your current journal can't do</h3>
-            <p>Tell you your <strong>probability of blowing your account</strong> (Risk of Ruin). Show you which hours make you money and which cost you (<strong>Kill Zones</strong>). Grade every trade <strong>A-F automatically</strong>. Run <strong>1,000 simulations</strong> of your equity curve. Tell you <strong>what to cut</strong> from your strategy with dollar amounts. Give you a live <strong>FOCUS / AVOID signal</strong> based on your own history. Track your <strong>prop firm challenge</strong> in real time. Show how <strong>events like NFP and FOMC</strong> actually affect your P&L. Dojix does all of this.</p>
+            <ul class="callout-list">
+                <li>Tell you your <strong>probability of blowing your account</strong> (Risk of Ruin)</li>
+                <li>Show you which hours make you money and which cost you (<strong>Kill Zones</strong>)</li>
+                <li>Grade every trade <strong>A-F automatically</strong></li>
+                <li>Run <strong>1,000 simulations</strong> of your equity curve</li>
+                <li>Tell you <strong>what to cut</strong> from your strategy with dollar amounts</li>
+                <li>Give you a live <strong>FOCUS / AVOID signal</strong> based on your own history</li>
+                <li>Track your <strong>prop firm challenge</strong> in real time</li>
+                <li>Show how <strong>events like NFP and FOMC</strong> actually affect your P&L</li>
+            </ul>
+            <p style="margin-top:16px;font-size:15px;color:var(--text);font-weight:600;">Dojix does all of this.</p>
         </div>
 
         <section class="section" id="pricing">
@@ -482,6 +505,21 @@
         <div class="privacy-banner">
             <h3>Your data never leaves your Mac</h3>
             <p>Dojix is local-first. Your trades, analytics, and journal entries are stored in a local database on your Mac. No cloud sync. No telemetry. No tracking. We can't see your data even if we wanted to.</p>
+        </div>
+
+        <div class="trust-strip">
+            <div class="trust-item">
+                <span class="trust-icon">&#9881;</span>
+                <span>Built by an active forex trader</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">&#128274;</span>
+                <span>AES-256 encrypted, 5 security audits</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">&#9989;</span>
+                <span>218 tests passing, zero warnings</span>
+            </div>
         </div>
 
         <section class="section" id="waitlist" style="text-align:center;padding-bottom:100px;">
