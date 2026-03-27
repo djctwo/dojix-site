@@ -16,12 +16,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://dojix.app/privacy</loc>
+    <loc>https://dojix.app/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://dojix.app/terms</loc>
+    <loc>https://dojix.app/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

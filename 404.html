@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found - Dojix</title>
     <meta name="theme-color" content="#0e0d0b">
+    <meta name="robots" content="noindex">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -27,6 +28,9 @@
         footer a { color:var(--muted);text-decoration:none; }
         footer a:hover { color:var(--text); }
         :focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+        @media (prefers-reduced-motion:reduce) {
+            *,*::before,*::after { animation-duration:0.01ms !important;transition-duration:0.01ms !important; }
+        }
     </style>
 </head>
 <body>
