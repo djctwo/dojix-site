@@ -27,15 +27,17 @@
 - **Accessibility**: skip links, `<main>` landmarks, `focus-visible`, `sr-only`, `prefers-reduced-motion`, ARIA on FAQ accordions
 
 ## Current State
-- **Pre-launch**: Waiting on Paddle approval to go live. All CTA buttons say "Join Waitlist" → `mailto:waitlist@dojix.app`. When Paddle approves, swap mailto hrefs for real checkout/download URLs.
-- **Rollback tag**: `pre-critique-redesign` at commit `f0eaadd` (original site before warm gold redesign)
+- **Pre-launch**: Waiting on Paddle approval to go live. Waitlist form captures emails via Formspree (f/xykbkzdb → doug@dojix.app). When Paddle approves, swap waitlist CTAs for real checkout/download URLs.
+- **Rollback tags**: `pre-critique-redesign` (original site), `pre-critique-v2` (before critique fixes), `pre-polish-v1` (before polish pass)
 - **SEO**: robots.txt, sitemap.xml, JSON-LD (Organization, SoftwareApplication, FAQPage), OG tags on all pages
-- **Mobile**: hamburger nav on homepage, features, support; privacy/terms have simple "Back to Home"
+- **Mobile**: hamburger nav on all pages with aria-expanded toggling
 
 ## Design Critique History
 - **Pre-redesign score**: 20/40 (Nielsen's 10 Heuristics), 7 AI slop tells
 - **Post-redesign score**: 26/40, AI slop PASS, cognitive load reduced from 6/8 Critical to 3/8 Moderate
 - All 5 post-redesign critique issues fixed (P1: download buttons, P1: features grouping, P2: mobile nav, P2: 404 page, P3: comparison table)
+- **2026-03-27 critique**: 28/40 → 33/40 after fixes (waitlist form, nav consistency, scroll-spy, lightbox keyboard, callout banner, trust strip)
+- **2026-03-27 polish pass**: accessibility, consistency, and SEO fixes across all 6 pages
 
 ## Technical Audit History
 - **Audit score (2026-03-26)**: 10/20 → all 5 recommended actions completed (/harden, /normalize, /adapt, /optimize, /polish)
@@ -59,7 +61,9 @@
 - All pages use inline `<style>` blocks (no shared CSS file)
 - Images in `/images/` directory
 - Lightbox on pages with screenshots (features, homepage)
-- Footer consistent across pages: Home, Features, FAQ, Privacy, Terms, Contact
+- Footer consistent across pages: Home, Features, Support, Privacy, Terms, Contact
 - All colors tokenized in `:root` — never use raw hex outside `:root` definitions or `<meta>` tags
 - All feature images: 1600x1100, must include `width` and `height` attributes
+- All internal links use trailing slashes for directory-based pages (`/privacy/`, `/terms/`, `/features/`, `/support/`)
 - Legal entity: Aaxis Holdings Group LLC
+- Waitlist backend: Formspree (f/xykbkzdb), signups go to doug@dojix.app, free tier 50/month
