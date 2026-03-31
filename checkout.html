@@ -16,13 +16,29 @@
         .container h2 { margin-bottom: 8px; }
         .container p { color: #8b949e; font-size: 14px; }
         .error { color: #f85149; margin-top: 16px; font-size: 13px; display: none; }
+        .success { display: none; margin-top: 24px; }
+        .success h2 { color: #58a6ff; }
+        .success p { color: #8b949e; font-size: 14px; margin: 8px 0; }
+        .return-btn {
+            display: inline-block; margin-top: 16px; padding: 12px 32px;
+            background: #e8b44c; color: #0e0d0b; font-weight: 600; font-size: 16px;
+            border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+        }
+        .return-btn:hover { background: #f0c060; }
+        .txn-id { font-family: monospace; font-size: 12px; color: #6e7681; margin-top: 12px; word-break: break-all; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="checkout-state">
         <h2>Opening checkout...</h2>
         <p>The Paddle checkout overlay should appear momentarily.</p>
         <p class="error" id="error"></p>
+    </div>
+    <div class="success" id="success-state">
+        <h2>Payment successful!</h2>
+        <p>Click below to return to Dojix and activate your subscription.</p>
+        <a class="return-btn" id="return-link" href="#">Return to Dojix</a>
+        <p class="txn-id" id="txn-display"></p>
     </div>
     <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <script>
@@ -41,7 +57,18 @@
                     eventCallback: function(event) {
                         if (event.name === 'checkout.completed') {
                             var txnId = event.data && event.data.transaction_id ? event.data.transaction_id : '';
-                            window.location.href = 'dojix://subscription/success?transaction_id=' + txnId;
+                            var deepLink = 'dojix://subscription/success?transaction_id=' + encodeURIComponent(txnId);
+
+                            // Show success state with return button
+                            document.getElementById('checkout-state').style.display = 'none';
+                            document.getElementById('success-state').style.display = 'block';
+                            document.getElementById('return-link').href = deepLink;
+                            if (txnId) {
+                                document.getElementById('txn-display').textContent = 'Transaction: ' + txnId;
+                            }
+
+                            // Try automatic redirect (may be blocked by browser)
+                            window.location.href = deepLink;
                         }
                     }
                 });
