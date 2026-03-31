@@ -57,7 +57,7 @@
                     eventCallback: function(event) {
                         if (event.name === 'checkout.completed') {
                             var txnId = event.data && event.data.transaction_id ? event.data.transaction_id : '';
-                            var deepLink = 'dojix://subscription/success?transaction_id=' + encodeURIComponent(txnId);
+                            var deepLink = 'dojix://subscription/success?transaction_id=' + encodeURIComponent(txnId) + '&price_id=' + encodeURIComponent(priceId);
 
                             // Show success state with return button
                             document.getElementById('checkout-state').style.display = 'none';
