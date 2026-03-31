@@ -42,24 +42,41 @@
     </div>
     <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <script>
+        var ID_PATTERN = /^[a-zA-Z0-9_-]{1,128}$/;
         var params = new URLSearchParams(window.location.search);
         var priceId = params.get('price_id');
         var machineId = params.get('machine_id');
         var errEl = document.getElementById('error');
 
-        if (!priceId) {
+        function showError(msg) {
             errEl.style.display = 'block';
-            errEl.textContent = 'Missing price_id parameter.';
+            errEl.textContent = msg;
+        }
+
+        if (!priceId || !ID_PATTERN.test(priceId)) {
+            showError('Invalid or missing price_id parameter.');
+        } else if (machineId && !ID_PATTERN.test(machineId)) {
+            showError('Invalid machine_id parameter.');
         } else {
+            // Detect Paddle CDN load failure
+            var cdnTimeout = setTimeout(function() {
+                if (typeof Paddle === 'undefined') {
+                    showError('Checkout service failed to load. Please try again or contact support@dojix.app');
+                }
+            }, 8000);
+
             try {
                 Paddle.Initialize({
                     token: 'live_e1682f25583561bd8cb11a1dc2c',
                     eventCallback: function(event) {
+                        clearTimeout(cdnTimeout);
                         if (event.name === 'checkout.completed') {
-                            var txnId = event.data && event.data.transaction_id ? event.data.transaction_id : '';
+                            var txnId = '';
+                            if (event.data && typeof event.data.transaction_id === 'string' && ID_PATTERN.test(event.data.transaction_id)) {
+                                txnId = event.data.transaction_id;
+                            }
                             var deepLink = 'dojix://subscription/success?transaction_id=' + encodeURIComponent(txnId) + '&price_id=' + encodeURIComponent(priceId);
 
-                            // Show success state with return button
                             document.getElementById('checkout-state').style.display = 'none';
                             document.getElementById('success-state').style.display = 'block';
                             document.getElementById('return-link').href = deepLink;
@@ -67,7 +84,6 @@
                                 document.getElementById('txn-display').textContent = 'Transaction: ' + txnId;
                             }
 
-                            // Try automatic redirect (may be blocked by browser)
                             window.location.href = deepLink;
                         }
                     }
@@ -77,8 +93,8 @@
                     customData: machineId ? { machine_id: machineId } : {}
                 });
             } catch(e) {
-                errEl.style.display = 'block';
-                errEl.textContent = 'Checkout error: ' + e.message;
+                clearTimeout(cdnTimeout);
+                showError('Checkout error: ' + e.message);
             }
         }
     </script>
