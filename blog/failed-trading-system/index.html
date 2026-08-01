@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Spent 7 Months Building a Trading System That Lost Money — Here's All the Data - Dojix</title>
+    <meta name="description" content="A full post-mortem of an automated forex portfolio: 5 algorithms, 139 trades, $5,000 → $3,807, and the analytics engine that became Dojix. Real losing numbers, published.">
+    <link rel="canonical" href="https://dojix.app/blog/failed-trading-system/">
+    <meta property="og:title" content="I Spent 7 Months Building a Trading System That Lost Money — Here's All the Data">
+    <meta property="og:description" content="5 algorithms, 139 trades, $5,000 → $3,807. The instrumented failure that became Dojix.">
+    <meta property="og:url" content="https://dojix.app/blog/failed-trading-system/">
+    <meta property="og:type" content="article">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#0e0d0b;--surface:#141310;--card:#1c1b18;--border:rgba(255,220,160,0.08);--border-strong:rgba(255,220,160,0.14);--text:#e8e4dc;--muted:#9a9488;--accent:#e8b44c;--accent-hover:#f0c060; }
+        * { margin:0;padding:0;box-sizing:border-box; }
+        body { font-family:'DM Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased; }
+        .container { max-width:720px;margin:0 auto;padding:0 24px; }
+        nav { padding:20px 0;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(14,13,11,0.92);backdrop-filter:blur(20px);z-index:100; }
+        nav .container { max-width:1080px;display:flex;justify-content:space-between;align-items:center; }
+        .logo { font-size:22px;font-weight:700;letter-spacing:-0.5px;text-decoration:none;color:var(--text); }
+        .logo span { color:var(--accent); }
+        .logo img { width:28px;height:28px;vertical-align:middle;margin-right:8px;border-radius:6px; }
+        nav a { color:var(--muted);text-decoration:none;margin-left:32px;font-size:14px;font-weight:500;transition:color 0.2s; }
+        nav a:hover { color:var(--text); }
+        .hamburger { display:none;background:none;border:none;cursor:pointer;padding:8px; }
+        .hamburger svg { width:22px;height:22px;stroke:var(--text); }
+        .nav-links { display:flex;align-items:center; }
+        .btn-waitlist { display:inline-block;padding:8px 20px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;background:var(--accent);color:var(--bg);transition:all 0.2s; }
+        .btn-waitlist:hover { background:var(--accent-hover);transform:translateY(-1px); }
+        h1 { font-size:34px;font-weight:700;margin:60px 0 8px;letter-spacing:-1px;line-height:1.25; }
+        .updated { color:var(--muted);font-size:14px;margin-bottom:40px; }
+        h2 { font-size:22px;font-weight:600;margin:40px 0 12px;color:var(--accent); }
+        p, li { font-size:15px;color:var(--muted);margin-bottom:12px; }
+        ul { padding-left:20px; }
+        li { margin-bottom:8px; }
+        strong { color:var(--text); }
+        a { color:var(--accent); }
+        .stats { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0; }
+        .stat { background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 16px;text-align:center; }
+        .stat .num { font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--text);display:block; }
+        .stat .lbl { font-size:12px;color:var(--muted);margin-top:4px;display:block; }
+        .cta-box { background:var(--surface);border:1px solid var(--border-strong);border-left:3px solid var(--accent);border-radius:12px;padding:24px;margin:36px 0; }
+        .cta-box p { margin-bottom:16px; }
+        .btn-gh { display:inline-block;padding:12px 24px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;background:var(--accent);color:var(--bg);transition:all 0.2s; }
+        .btn-gh:hover { background:var(--accent-hover);transform:translateY(-1px); }
+        footer { border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:13px;margin-top:80px; }
+        footer a { color:var(--muted);text-decoration:none;margin:0 12px; }
+        footer a:hover { color:var(--text); }
+        .footer-links { margin-bottom:16px; }
+        .skip-link { position:absolute;top:-100%;left:16px;background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:0 0 8px 8px;font-weight:600;z-index:200;text-decoration:none; }
+        .skip-link:focus { top:0; }
+        :focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+        @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:0.01ms !important;transition-duration:0.01ms !important; } }
+        @media (max-width:600px) {
+            .hamburger { display:block; }
+            .nav-links { display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:12px; }
+            .nav-links.open { display:flex; }
+            .nav-links a { margin-left:0;font-size:15px; }
+            .nav-links .btn-waitlist { text-align:center;margin-top:4px; }
+            nav .container { position:relative; }
+            .stats { grid-template-columns:1fr; }
+            h1 { font-size:28px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
+                <a href="/features/">Features</a>
+                <a href="/#pricing">Pricing</a>
+                <a href="/support/">Support</a>
+                <a href="/#waitlist" class="btn btn-waitlist" style="padding:8px 20px;font-size:14px;">Join Waitlist</a>
+            </div>
+        </div>
+    </nav>
+    <main id="main" class="container">
+        <h1>I spent 7 months building a trading system that lost money. Here's all the data.</h1>
+        <p class="updated">August 2026 · by the developer of Dojix</p>
+
+        <p>Before Dojix was a product, it was a survival tool. I was running five automated forex algorithms on a VPS — institutional liquidity-sweep strategies on MetaTrader 5 — and I needed to know, honestly, whether they worked. So I built a 13-module analytics engine to measure every trade: maximum favorable excursion, R-multiple capture, session and hour edge decomposition, exit-policy counterfactuals.</p>
+
+        <p><strong>The answer was no. They didn't work.</strong> And the full post-mortem — every number, every bug, every chart, the raw trade data — is now public.</p>
+
+        <div class="stats">
+            <div class="stat"><span class="num">139</span><span class="lbl">positions, fully instrumented</span></div>
+            <div class="stat"><span class="num">$5,000 → $3,807</span><span class="lbl">seven months, zero profitable</span></div>
+            <div class="stat"><span class="num">+$0.65</span><span class="lbl">best-case per trade vs +$5.00 gate</span></div>
+        </div>
+
+        <p>The short version: a broken exit system was manufacturing a 74% win rate out of entries that won 32% of the time when measured honestly. Fixing the bug didn't reveal a hidden edge — it revealed there was never an edge. The pre-registered performance gate I'd set months earlier is what let me quit honestly instead of revising forever.</p>
+
+        <div class="cta-box">
+            <p><strong>Read the full post-mortem on GitHub</strong> — the article, the analytics architecture, a complete EA source file, the revision logs, and the raw verification trades as CSV. Almost nobody publishes losing results with real numbers. This is what that looks like.</p>
+            <a class="btn-gh" href="https://github.com/djctwo/forex-postmortem">Read it on GitHub &rarr;</a>
+        </div>
+
+        <h2>Why this matters for Dojix</h2>
+        <p>Every analysis in that post-mortem — the MFE capture that exposed the exit bug, the hour-of-day decomposition that found the losing kill zones, the honest R-multiple accounting that killed the fantasy win rate — is the kind of analysis Dojix runs on <em>your</em> trading history. The methodology was pressure-tested against real losing data, mine, before it ever became a product.</p>
+        <p>If the charts in the post-mortem look like the truth you wish you had about your own trading: <a href="/#waitlist">that's the app</a>.</p>
+
+        <p style="margin-top:40px;font-size:13px;">Dojix is built by <a href="https://aaxisholdingsgroup.com">Aaxis Holdings Group</a>.</p>
+    </main>
+    <footer>
+        <div class="container" style="max-width:1080px;">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">Terms</a>
+                <a href="mailto:support@dojix.app">Contact</a>
+            </div>
+            <p>&copy; 2026 Aaxis Holdings Group LLC. Dojix&trade; All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
