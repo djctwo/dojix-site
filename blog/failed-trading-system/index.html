@@ -137,8 +137,16 @@
             <a class="btn-gh" href="https://github.com/djctwo/forex-postmortem">Read it on GitHub &rarr;</a>
         </div>
 
-        <h2>Why this matters for Dojix</h2>
-        <p>Every analysis in that post-mortem — the MFE capture that exposed the exit bug, the hour-of-day decomposition that found the losing kill zones, the honest R-multiple accounting that killed the fantasy win rate — is the kind of analysis Dojix runs on <em>your</em> trading history. The methodology was pressure-tested against real losing data, mine, before it ever became a product.</p>
+        <h2>How Dojix was actually used in this project</h2>
+        <p>Dojix wasn't a bystander here — it was part of the decision loop. Every trade the portfolio produced flowed from the VPS into Dojix, and two of its analyses fed directly into the revision decisions you can read in the post-mortem:</p>
+        <ul>
+            <li><strong>Kill Zone Optimizer</strong> &mdash; decomposes your P&L by hour and session to find the windows where you make money and the windows that quietly bleed. On this portfolio it flagged hour 10 (London) as an avoid window and hour 17 (NY) as one of the few genuine edge windows — calls that held up in the final verification data, where the three worst hours accounted for more than the entire net loss.</li>
+            <li><strong>What to Cut</strong> &mdash; surfaces the specific conditions (hours, setups, directions, instruments) with persistent negative expectancy. Its exports were on the table for the June evaluation that cut the two worst algorithms from the portfolio.</li>
+        </ul>
+        <p>That's the honest version of a product claim: the app's job is to find where your edge isn't, and on this portfolio it kept being right.</p>
+
+        <h2>What else it analyzes</h2>
+        <p>The same engine runs 66 analytics across your imported history — an <strong>Edge Report</strong> that grades every setup you trade, <strong>timing analytics</strong> (hourly P&L, session heatmaps, day-of-week), honest <strong>R-multiple and MFE/MAE capture</strong> (the exact analysis that exposed this project's exit bug), <strong>behavioral analytics</strong> like emotional P&L and checklist compliance, <strong>drawdown recovery</strong>, and <strong>Monte Carlo risk-of-ruin projections</strong>. Imports from 9 platforms, everything local on your Mac.</p>
         <p>If the charts in the post-mortem look like the truth you wish you had about your own trading: <a href="/#waitlist">that's the app</a>.</p>
 
         <p style="margin-top:40px;font-size:13px;">Dojix is built by <a href="https://aaxisholdingsgroup.com">Aaxis Holdings Group</a>.</p>
