@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojix - Free, Open-Source Trade Journal for Mac</title>
+    <meta name="description" content="Dojix is a free, open-source trade journal for forex traders on the Mac. More than 60 analytics, an Edge Report in dollars, and an encrypted journal that never leaves your Mac.">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="canonical" href="https://dojix.app/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dojix.app/">
+    <meta property="og:title" content="Dojix - Free, Open-Source Trade Journal for Mac">
+    <meta property="og:description" content="Free and open source (GPL-3.0). See, in dollars, where you make money and where you lose it. Your trades never leave your Mac.">
+    <meta property="og:image" content="https://dojix.app/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dojix - See your edge.">
+    <meta name="twitter:description" content="A free, open-source trade journal for forex traders on the Mac. Your trades never leave your Mac.">
+    <meta name="twitter:image" content="https://dojix.app/images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="/images/sample-dashboard.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0d0b;
+            --surface: #141310;
+            --card: #1c1b18;
+            --border: rgba(255,220,160,0.08);
+            --border-strong: rgba(255,220,160,0.14);
+            --text: #e8e4dc;
+            --muted: #9a9488;
+            --accent: #e8b44c;
+            --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
+            --green: #5cc98a;
+            --red: #e06050;
+            --blue: #6ba3d9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(14,13,11,0.92);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-decoration: none; color: var(--text); }
+        .logo span { color: var(--accent); }
+        .logo img { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; border-radius: 6px; }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero { padding: 100px 0 80px; text-align: center; }
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(232,180,76,0.2);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+        h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        h1 .highlight { color: var(--accent); }
+        .subtitle { font-size: 20px; color: var(--muted); max-width: 640px; margin: 0 auto 40px; line-height: 1.5; }
+        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        .btn-download { background: var(--accent); color: var(--bg); }
+        .btn-download:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .hero-facts { margin-top: 20px; font-size: 14px; color: var(--muted); }
+        .hero-facts strong { color: var(--text); font-weight: 500; }
+
+        /* Hero screenshot */
+        .hero-image { margin-top: 60px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-strong); }
+        .hero-image img { width: 100%; height: auto; display: block; cursor: pointer; }
+        .image-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+        /* Stats strip */
+        .stats {
+            display: flex; justify-content: center; gap: 48px; padding: 48px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            margin: 0 0 80px; flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px; font-weight: 500; font-variant-numeric: tabular-nums;
+        }
+        .stat-value.accent { color: var(--accent); }
+        .stat-value.green { color: var(--green); }
+        .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        /* Sections */
+        .section { padding: 80px 0; }
+        .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+        h2 { font-size: 36px; font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
+        .section-desc { font-size: 17px; color: var(--muted); max-width: 600px; margin-bottom: 48px; }
+
+        /* Feature cards — varied layout */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+        .feature-card:hover { border-color: var(--border-strong); }
+        .feature-card.hero-card {
+            grid-column: span 2;
+            background: var(--surface);
+            border-color: var(--border-strong);
+            border-top: 2px solid var(--accent);
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        .feature-card .card-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.3px; }
+        .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+        .hero-card .card-content { flex: 1; }
+        .hero-card .card-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 500;
+            color: var(--accent);
+            line-height: 1;
+            padding-top: 4px;
+            white-space: nowrap;
+        }
+        .features-cta { text-align: center; margin-top: 40px; }
+
+        /* Callout banner */
+        .callout-banner {
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 14px 14px 0;
+            padding: 40px;
+            margin: 0 0 48px;
+        }
+        .callout-banner h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+        .callout-banner p { font-size: 16px; color: var(--muted); line-height: 1.7; }
+        .callout-banner strong { color: var(--text); }
+        .callout-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+        .callout-list li { font-size: 15px; color: var(--muted); line-height: 1.5; padding-left: 20px; position: relative; }
+        .callout-list li::before { content: '\2713'; color: var(--green); position: absolute; left: 0; font-weight: 700; }
+
+        /* Free & open source */
+        .oss-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .oss-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
+        .oss-card.install { background: var(--surface); border-color: var(--border-strong); border-top: 2px solid var(--accent); }
+        .oss-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; letter-spacing: -0.3px; }
+        .oss-card p { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+        .oss-card p:last-child { margin-bottom: 0; }
+        .oss-card a { color: var(--accent); }
+        .oss-card strong { color: var(--text); font-weight: 600; }
+        .check-list { list-style: none; margin-bottom: 16px; }
+        .check-list li { padding: 8px 0; font-size: 14px; color: var(--muted); border-bottom: 1px solid var(--border); }
+        .check-list li::before { content: '\2713  '; color: var(--green); font-weight: 700; }
+        .install-steps { padding-left: 20px; margin-bottom: 16px; }
+        .install-steps li { font-size: 14px; color: var(--muted); padding: 6px 0; line-height: 1.6; }
+        .install-steps li::marker { font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+        .install-steps code, .oss-card code { overflow-wrap: anywhere; font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--card); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; color: var(--text); }
+        .coming-soon { display: inline-block; margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(232,180,76,0.2); padding: 3px 10px; border-radius: 4px; }
+
+        /* Privacy banner */
+        .privacy-banner { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 40px; text-align: center; margin: 48px 0; }
+        .privacy-banner h3 { font-size: 24px; margin-bottom: 12px; }
+        .privacy-banner p { color: var(--muted); max-width: 640px; margin: 0 auto; }
+        .privacy-banner a { color: var(--accent); }
+
+        /* Trust strip */
+        .trust-strip {
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            padding: 32px 0; margin: 16px 0 0;
+            border-top: 1px solid var(--border);
+        }
+        .trust-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+        .trust-icon { font-size: 18px; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
+        footer a { color: var(--muted); text-decoration: none; margin: 0 12px; }
+        footer a:hover { color: var(--text); }
+        footer p a { margin: 0; text-decoration: underline; }
+        .footer-links { margin-bottom: 16px; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
+        .lightbox-close {
+            position: fixed; top: 20px; right: 24px; z-index: 1001;
+            background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+            color: #fff; font-size: 20px; width: 44px; height: 44px; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            transition: border-color 0.2s;
+        }
+        .lightbox-close:hover { border-color: rgba(255,255,255,0.5); }
+        .lightbox.active + .lightbox-close { display: flex; }
+
+        @media (max-width: 1024px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-card.hero-card { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; }
+            .feature-card.hero-card { grid-column: span 1; flex-direction: column; }
+            .hero-card .card-stat { font-size: 36px; }
+            .callout-list { grid-template-columns: 1fr; }
+            .oss-grid { grid-template-columns: 1fr; }
+        }
+        /* Hamburger */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
+        .nav-links { display: flex; align-items: center; }
+
+        @media (max-width: 600px) {
+            .stats { gap: 24px; }
+            .hero { padding: 60px 0 40px; }
+            .callout-banner { padding: 24px; }
+            .oss-card { padding: 24px; }
+            .privacy-banner { padding: 28px 20px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 12px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin-left: 0; font-size: 15px; }
+            .nav-links .btn-download { text-align: center; margin-top: 4px; }
+            nav .container { position: relative; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download" style="padding:8px 20px;font-size:14px;">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main" class="container">
+        <section class="hero">
+            <div class="badge">Free &middot; Open Source (GPL-3.0) &middot; Native Mac App</div>
+            <h1>See your <span class="highlight">edge</span>.</h1>
+            <p class="subtitle">A free, open-source trade journal for forex traders on the Mac. Import your history and Dojix shows you, in dollars, where you make money and where you lose it.</p>
+            <div class="cta-group">
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download">Download for Mac</a>
+                <a href="https://github.com/djctwo/dojix" class="btn btn-secondary">View on GitHub</a>
+            </div>
+            <p class="hero-facts"><strong>macOS 14+</strong> &middot; No account &middot; No telemetry &middot; Journal encrypted on your Mac &middot; Windows version coming soon</p>
+            <div class="hero-image">
+                <img src="/images/sample-dashboard.png" alt="Dojix Dashboard with the built-in sample trades: daily brief, metric cards and prop firm tracker" width="1600" height="1066" loading="eager" onclick="openLightbox(this)">
+            </div>
+            <p class="image-note">Screenshots show the built-in sample trades. Every number in them is made up.</p>
+        </section>
+
+        <div class="stats">
+            <div class="stat"><div class="stat-value accent">60+</div><div class="stat-label">Analytics</div></div>
+            <div class="stat"><div class="stat-value green">9</div><div class="stat-label">Import Formats</div></div>
+            <div class="stat"><div class="stat-value">A-F</div><div class="stat-label">Trade Grading</div></div>
+            <div class="stat"><div class="stat-value accent">GPL-3.0</div><div class="stat-label">Free &amp; Open Source</div></div>
+        </div>
+
+        <section class="section">
+            <div class="section-label">Why Dojix</div>
+            <h2>Built for traders who want answers, not just charts</h2>
+            <p class="section-desc">Dojix ranks the sessions, hours, days and pairs that help or hurt you, with dollar amounts on each one.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card hero-card">
+                    <div class="card-content">
+                        <div class="card-num">01</div>
+                        <h3>More than 60 analytics</h3>
+                        <p>Win rate, profit factor, expectancy, drawdown, equity curve, P&amp;L calendar, heatmaps, streaks, Monte Carlo, risk of ruin, position sizing, a kill-zone optimizer, a "what to cut" advisor, a prop-firm tracker and more. An Essential view keeps it simple when you want less.</p>
+                    </div>
+                    <div class="card-stat">60+</div>
+                </div>
+                <div class="feature-card">
+                    <div class="card-num">02</div>
+                    <h3>An Edge Report in dollars</h3>
+                    <p>Your top 5 places to make and lose money by session, hour, day and pair, plus bias-alignment and volatility breakdowns. Export it as PDF or CSV.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-num">03</div>
+                    <h3>Know when to trade</h3>
+                    <p>The Kill Zone Optimizer finds your profitable hours. What to Cut shows what's costing you. Session Intelligence rates each session FOCUS, OK, REDUCE or AVOID from your own history.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-num">04</div>
+                    <h3>Every trade graded A-F</h3>
+                    <p>Each trade is scored on R-multiple, execution, timing and management. See your discipline and consistency scores alongside it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-num">05</div>
+                    <h3>Monte Carlo your future</h3>
+                    <p>1,000 randomized runs of your trade history show the range of outcomes, your odds of hitting a target, and your risk of ruin.</p>
+                </div>
+                <div class="feature-card" style="grid-column: 1 / -1;">
+                    <div class="card-num">06</div>
+                    <h3>Local and encrypted</h3>
+                    <p>Your journal is a local database encrypted on disk with AES-256-GCM. No account, no cloud sync, no telemetry. Turn on App Lock and the journal can't be decrypted without your password.</p>
+                </div>
+            </div>
+
+            <div class="features-cta">
+                <a href="/features/" class="btn btn-secondary">See all features with screenshots &rarr;</a>
+            </div>
+        </section>
+
+        <div class="callout-banner">
+            <h3>Questions Dojix answers from your own trades</h3>
+            <ul class="callout-list">
+                <li>What is my <strong>probability of blowing the account</strong>? (Risk of Ruin)</li>
+                <li>Which hours make me money and which cost me? (<strong>Kill Zones</strong>)</li>
+                <li>How good was each trade, <strong>graded A-F</strong>?</li>
+                <li>What do <strong>1,000 simulations</strong> of my equity curve look like?</li>
+                <li>What should I <strong>cut</strong> from my trading, in dollars?</li>
+                <li>Should I <strong>focus or sit out</strong> the session that's open right now?</li>
+                <li>Am I on track in my <strong>prop firm challenge</strong>?</li>
+                <li>How do <strong>NFP, FOMC and CPI</strong> days affect my P&amp;L?</li>
+            </ul>
+        </div>
+
+        <section class="section" id="download">
+            <div class="section-label">Free &amp; Open Source</div>
+            <h2>Every feature, for everyone</h2>
+            <p class="section-desc">Dojix is free software under the GNU GPL v3.0. Nothing is locked and nothing expires. The full source code is on GitHub.</p>
+
+            <div class="oss-grid">
+                <div class="oss-card">
+                    <h3>What you get</h3>
+                    <ul class="check-list">
+                        <li>The complete app, free</li>
+                        <li>Source code under GPL-3.0</li>
+                        <li>No account and no subscription</li>
+                        <li>No telemetry, no cloud sync</li>
+                        <li>Journal encrypted on your Mac (AES-256-GCM)</li>
+                        <li>30 fictional sample trades to explore first</li>
+                    </ul>
+                    <p>Optional online features (AI recommendations, live prices, OANDA import) are off by default and run only with your own keys. <a href="/privacy/">What they send</a>.</p>
+                </div>
+                <div class="oss-card install">
+                    <h3>Install</h3>
+                    <ol class="install-steps">
+                        <li>Download <code>Dojix-macOS-unsigned.zip</code> from the <a href="https://github.com/djctwo/dojix/releases/latest">latest release</a>.</li>
+                        <li>Unzip it and drag <strong>Dojix.app</strong> to Applications.</li>
+                        <li>The build is unsigned, so the first time, <strong>right-click Dojix.app &rarr; Open</strong>, then Open again. No Open button? Go to <strong>System Settings &rarr; Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</li>
+                    </ol>
+                    <p>Requires macOS 14 Sonoma or later. Each release has a <code>.sha256</code> file to check the download. You can also <a href="https://github.com/djctwo/dojix#build-from-source">build from source</a>.</p>
+                    <p><span class="coming-soon">Windows version coming soon</span></p>
+                </div>
+            </div>
+        </section>
+
+        <div class="privacy-banner">
+            <h3>Your trades never leave your Mac</h3>
+            <p>The journal and your trade screenshots are encrypted on disk, and the key lives in your macOS Keychain. There is no account to create, no server, no cloud sync and no telemetry. If you add your own Anthropic API key, the Edge Report's AI recommendations receive only summary statistics, never individual trades or notes, and only when you click Run Analysis. <a href="/privacy/">Privacy details</a>.</p>
+        </div>
+
+        <div class="trust-strip">
+            <div class="trust-item">
+                <span class="trust-icon">&#9881;</span>
+                <span>Free and open source (GPL-3.0)</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">&#128274;</span>
+                <span>AES-256-GCM encrypted journal</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">&#9989;</span>
+                <span>No account, no telemetry</span>
+            </div>
+        </div>
+
+        <section class="section" style="text-align:center;padding-bottom:100px;">
+            <div class="section-label">Get Started</div>
+            <h2>Download Dojix</h2>
+            <p class="section-desc" style="margin:0 auto 32px;">Free for macOS 14 Sonoma or later. No account needed.</p>
+            <div class="cta-group">
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download">Download for Mac</a>
+                <a href="https://github.com/djctwo/dojix" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">License</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+            </div>
+            <p>&copy; 2026 Douglas Cleary. Dojix is free software under the GNU GPL v3.0.</p>
+            <p>Created by <a href="https://github.com/djctwo">Douglas Cleary</a></p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-label="Image preview">
+        <img id="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image preview">&times;</button>
+    <script>
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.src;
+            document.getElementById('lightbox-img').alt = el.alt;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Dojix",
+        "url": "https://dojix.app/",
+        "operatingSystem": "macOS 14+",
+        "applicationCategory": "FinanceApplication",
+        "description": "A free, open-source trade journal for forex traders on the Mac. More than 60 analytics and an Edge Report that ranks the sessions, hours, days and pairs that help or hurt you. The journal is encrypted and stays on your Mac.",
+        "isAccessibleForFree": true,
+        "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+        "downloadUrl": "https://github.com/djctwo/dojix/releases/latest",
+        "author": {
+            "@type": "Person",
+            "name": "Douglas Cleary",
+            "url": "https://github.com/djctwo"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": "More than 60 analytics, Edge Report, Monte Carlo simulation, Kill Zone Optimizer, trade grading A-F, session intelligence, prop firm tracker, imports from MetaTrader 4/5, cTrader, TradingView, OANDA, Interactive Brokers, thinkorswim, NinjaTrader and any CSV, encrypted local journal, optional AI recommendations with your own API key"
+    }
+    </script>
+</body>
+</html>

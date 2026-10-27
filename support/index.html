@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQ - Dojix</title>
+    <meta name="description" content="Frequently asked questions about Dojix, the free, open-source trade journal for Mac: installing, importing, privacy, and troubleshooting.">
+    <link rel="canonical" href="https://dojix.app/support/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0d0b;
+            --surface: #141310;
+            --card: #1c1b18;
+            --border: rgba(255,220,160,0.08);
+            --border-strong: rgba(255,220,160,0.14);
+            --text: #e8e4dc;
+            --muted: #9a9488;
+            --accent: #e8b44c;
+            --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
+            --green: #5cc98a;
+            --red: #e06050;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(14,13,11,0.92);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-decoration: none; color: var(--text); }
+        .logo span { color: var(--accent); }
+        .logo img { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; border-radius: 6px; }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+        .page-header { padding: 80px 0 48px; text-align: center; }
+        .page-header h1 { font-size: 42px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 12px; }
+        .page-header p { font-size: 18px; color: var(--muted); max-width: 500px; margin: 0 auto; }
+
+        .faq-section { margin-bottom: 56px; }
+        .faq-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: var(--card);
+        }
+        .faq-question {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: var(--accent); }
+        .faq-question .arrow {
+            font-size: 14px;
+            color: var(--muted);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-item.open .faq-question .arrow { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        .faq-answer-inner a { color: var(--accent); text-decoration: none; }
+        .faq-answer-inner a:hover { text-decoration: underline; }
+        .faq-answer-inner code {
+            background: rgba(255,220,160,0.06);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+            overflow-wrap: anywhere;
+        }
+        .faq-answer-inner ul { margin: 8px 0 0 20px; }
+        .faq-answer-inner li { margin-bottom: 4px; }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 40px;
+            text-align: center;
+            margin: 64px 0 80px;
+        }
+        .contact-card h2 { font-size: 24px; margin-bottom: 12px; }
+        .contact-card p { color: var(--muted); margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .contact-card a.contact-link {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .contact-card a.contact-link:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .response-time { font-size: 13px; color: var(--muted); margin-top: 12px; }
+        .response-time a { color: var(--accent); }
+
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
+        footer a { color: var(--muted); text-decoration: none; margin: 0 12px; }
+        footer a:hover { color: var(--text); }
+        footer p a { margin: 0; text-decoration: underline; }
+        .footer-links { margin-bottom: 16px; }
+
+        /* Hamburger */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
+        .nav-links { display: flex; align-items: center; }
+        .btn-download { background: var(--accent); color: var(--bg); }
+        .btn-download:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+        @media (max-width: 600px) {
+            .page-header { padding: 48px 0 32px; }
+            .page-header h1 { font-size: 32px; }
+            .faq-question { font-size: 15px; padding: 16px 20px; }
+            .faq-answer-inner { padding: 0 20px 16px; }
+            .contact-card { padding: 28px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 12px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin-left: 0; font-size: 15px; }
+            .nav-links .btn-download { text-align: center; margin-top: 4px; }
+            nav .container { position: relative; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download" style="padding:8px 20px;font-size:14px;">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main" class="container">
+        <div class="page-header">
+            <h1>Support & FAQ</h1>
+            <p>Answers to common questions. Can't find yours? Open an issue on GitHub.</p>
+        </div>
+
+        <!-- GETTING STARTED -->
+        <div class="faq-section">
+            <div class="faq-section-title">Getting Started</div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is Dojix? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Dojix is a free, open-source trade journal for forex traders on the Mac. Import your trade history and it gives you a journal, a dashboard of more than 60 analytics, and an Edge Report that ranks the sessions, hours, days and pairs that help or hurt you, in dollars. Your trades never leave your Mac.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Is it really free? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Every feature is available to everyone. Nothing is locked and nothing expires. Dojix is free software under the GNU GPL v3.0, and the full source code is on <a href="https://github.com/djctwo/dojix">GitHub</a>. The only possible costs are from optional services you connect with your own key (for example Anthropic for AI recommendations, or a paid live-price plan), which those providers bill to you directly.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I install it? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    <ul>
+                        <li>Download <code>Dojix-macOS-unsigned.zip</code> from the <a href="https://github.com/djctwo/dojix/releases/latest">latest release</a> on GitHub.</li>
+                        <li>Unzip it and drag <strong>Dojix.app</strong> to your Applications folder.</li>
+                        <li>The first time, <strong>right-click</strong> (or Control-click) Dojix.app, choose <strong>Open</strong>, then click <strong>Open</strong> again. If there's no Open button, try to open it once, then go to <strong>System Settings &gt; Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</li>
+                    </ul>
+                    You can also <a href="https://github.com/djctwo/dojix#build-from-source">build Dojix from source</a> with Xcode.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I try it before importing my own trades? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Go to <strong>Settings &gt; Data &gt; Load Sample Trades</strong> to add 30 fictional trades and explore every screen. <strong>Remove Sample Trades</strong> takes only those out again. To try an import, drop <code>samples/sample-mt4.csv</code> from the repository (five made-up trades) onto the Import screen.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I import my trades? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Dojix imports from:
+                    <ul>
+                        <li><strong>MetaTrader 5</strong> &mdash; StrategyAnalytics CSV</li>
+                        <li><strong>MetaTrader 4</strong> &mdash; trade history CSV</li>
+                        <li><strong>cTrader, TradingView, thinkorswim, NinjaTrader</strong> &mdash; CSV export from each platform</li>
+                        <li><strong>OANDA</strong> &mdash; CSV, or directly through the OANDA API with your own token</li>
+                        <li><strong>Interactive Brokers</strong> &mdash; CSV export</li>
+                        <li><strong>Any other platform</strong> &mdash; any CSV through a column-mapping screen</li>
+                    </ul>
+                    Drag and drop your file onto the Import screen. Dojix detects the format.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What macOS version do I need? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    macOS 14 Sonoma or later.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Is there a Windows version? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    A Windows version is coming soon. Today Dojix is a native Mac app.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- IMPORTING & DATA -->
+        <div class="faq-section">
+            <div class="faq-section-title">Importing & Data</div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is StrategyAnalytics (SA)? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    For MetaTrader 5 history, Dojix reads a 32-column "StrategyAnalytics" CSV format (files named <code>StrategyAnalytics_Results_*.csv</code>) that carries extra fields such as MAE/MFE and R-multiples. The script that writes that format is not part of the repository; any other MT5 CSV export can be imported through the column-mapping screen. Times in StrategyAnalytics files are broker-server time and are currently read as UTC, so hour and session statistics from those files can be shifted by your broker's offset.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Will importing duplicate my trades? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    No. Re-importing the same file, or a file that overlaps trades you already have, never creates duplicates.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">My CSV won't import. What should I check? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Common fixes:
+                    <ul>
+                        <li>Make sure the file is a <code>.csv</code> file (not .xlsx or .txt)</li>
+                        <li>Check that the file has column headers in the first row</li>
+                        <li>If your platform isn't detected, use the column-mapping screen to map the required fields and try again</li>
+                        <li>OANDA users can use the OANDA API import instead of a CSV</li>
+                    </ul>
+                    If it still won't work, <a href="https://github.com/djctwo/dojix/issues">open an issue on GitHub</a> with a small, made-up file in the same format. Never post real trades, account numbers, broker statements or API keys.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I set up auto-import from MT5? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. In Settings, set the path to your MT5 Common Files folder. Dojix watches that folder and imports new StrategyAnalytics exports automatically. On Mac, MT5 runs through Wine, so the folder is typically:<br>
+                    <code>~/Library/Application Support/net.metaquotes.wine.metatrader5/drive_c/Program Files/MetaTrader 5/MQL5/Files/</code>
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Where is my data stored? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    In <code>~/Library/Application Support/Dojix/</code> on your Mac. The journal and your trade screenshots are encrypted on disk with AES-256-GCM, and the decrypted journal exists only in memory while Dojix runs. There is no cloud sync, no telemetry and no server-side copy.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I back up my data? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    In <strong>Settings &gt; Data</strong>, use <strong>Export Backup</strong>. Adding a password is recommended: password-protected backups are encrypted (AES-256-GCM); a backup without a password is not. To restore, use <strong>Restore Backup</strong>. Every restore is checked before anything in your journal is replaced.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- PRIVACY & SECURITY -->
+        <div class="faq-section">
+            <div class="faq-section-title">Privacy & Security</div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Does Dojix send my trade data anywhere? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    No. Dojix works fully offline. The only network connections are optional features you turn on with your own keys, plus the public economic calendar:
+                    <ul>
+                        <li><strong>AI recommendations</strong> &mdash; a summary of your statistics goes to Anthropic, only when you click Run Analysis. Never individual trades, tickets or notes.</li>
+                        <li><strong>Live prices</strong> &mdash; the pairs on your watchlist go to your chosen provider (Twelve Data, Polygon.io or OANDA). MetaTrader 5 prices are read from a local file.</li>
+                        <li><strong>OANDA import</strong> &mdash; your OANDA token and account ID, to fetch your own history.</li>
+                        <li><strong>Economic calendar</strong> &mdash; downloads the public weekly calendar; nothing about you is sent.</li>
+                    </ul>
+                    There is no telemetry and no automatic update check. See the <a href="/privacy/">privacy page</a> for details.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Is my database encrypted? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes, always. The journal is encrypted on disk with AES-256-GCM and the key is kept in your macOS Keychain. With App Lock on, the key is sealed with your password, so the journal can't be decrypted without it, even by someone who copies the files.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Can I lock the app with a password? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Go to <strong>Settings &gt; Security</strong> and click <strong>Enable App Lock</strong> (minimum 8 characters). Dojix locks after the idle time you choose (Off, 1, 5, 15, 30 or 60 minutes; default 15) and whenever the Mac sleeps, the screen locks, or you hide or minimize Dojix. Wrong passwords are throttled. <strong>There is no password recovery:</strong> a forgotten password means erasing the local data and restoring from a backup.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do I report a security problem? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Please report it privately through the repository's <a href="https://github.com/djctwo/dojix/security">private vulnerability reporting</a> (Security tab &gt; Report a vulnerability), not in a public issue. Include the Dojix version and the steps to reproduce it, with made-up data only.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="faq-section">
+            <div class="faq-section-title">Features</div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What analytics does Dojix include? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    More than 60, grouped into tabs:
+                    <ul>
+                        <li><strong>Timing</strong> &mdash; trade calendar, hourly P&amp;L, day-of-week analysis, duration analysis, time heatmap</li>
+                        <li><strong>Sessions</strong> &mdash; session heatmap, R-multiple distribution, session intelligence, sequence analysis, streaks, kill zone optimizer, what-to-cut advisor</li>
+                        <li><strong>Pairs</strong> &mdash; win/loss distribution, pair analytics, lot size analysis, MAE/MFE, directional edge, slippage analysis</li>
+                        <li><strong>Risk</strong> &mdash; risk of ruin, discipline score, Monte Carlo, drawdown recovery, growth projections, position sizing, exit efficiency, commission tracking, net currency exposure</li>
+                        <li><strong>Behavioral</strong> &mdash; trade grades, consistency score, emotional P&amp;L, checklist compliance, improvement tracker, playbook catalog</li>
+                        <li><strong>Advanced</strong> &mdash; news calendar correlation, event impact profiler, benchmark comparison, pair correlation, edge decay, time-to-MFE</li>
+                    </ul>
+                    Plus the <strong>Edge Report</strong> and <strong>Pulse</strong>. An Essential view keeps the dashboard simple. See the <a href="/features/">Features page</a> for screenshots.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">How do the AI recommendations work? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    They are optional and off by default. Add your own Anthropic API key in Settings (usage is billed to your Anthropic account), then click <strong>Run Analysis</strong> in the Edge Report. Dojix sends a summary of your statistics (totals, and P&amp;L and win rate by session, hour, day, pair, bias and volatility), never individual trades or notes, and gets back 3-5 ranked recommendations with dollar estimates.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What live data sources are supported? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Five options for Pulse, all optional:
+                    <ul>
+                        <li><strong>Twelve Data REST</strong> (default) &mdash; polls every 2 minutes; Twelve Data's free tier allows 800 requests/day</li>
+                        <li><strong>Twelve Data WebSocket</strong> &mdash; real-time streaming, requires a paid Twelve Data plan</li>
+                        <li><strong>OANDA Streaming</strong> &mdash; real-time via the OANDA API, free with an OANDA account</li>
+                        <li><strong>Polygon.io WebSocket</strong> &mdash; real-time streaming, requires a Polygon.io subscription</li>
+                        <li><strong>MT5 Direct</strong> &mdash; reads prices written by a small Expert Advisor (<code>mt5/DojixPriceFeed.mq5</code> in the repository), no API key needed</li>
+                    </ul>
+                    Choose your source and enter its key in Settings.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">What is the Prop Firm Tracker? <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    It tracks your account against funded-account rules: account size, profit target, daily loss limit and maximum drawdown. Progress bars show how close you are to each limit so you can protect an evaluation or funded account.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <div class="faq-section">
+            <div class="faq-section-title">Troubleshooting</div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">macOS says Dojix "can't be opened" or "cannot verify the developer" <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    That's expected: Dojix is not signed with an Apple Developer ID or notarized. To open it:
+                    <ul>
+                        <li>In Finder, <strong>right-click</strong> (or Control-click) Dojix.app, choose <strong>Open</strong>, then click <strong>Open</strong> in the dialog. You only need to do this once.</li>
+                        <li>If there is no Open button, try to open the app once, then go to <strong>System Settings &gt; Privacy &amp; Security</strong>, scroll to the message about Dojix and click <strong>Open Anyway</strong>.</li>
+                    </ul>
+                    Download Dojix only from the <a href="https://github.com/djctwo/dojix/releases">GitHub Releases page</a>, and compare the <code>.sha256</code> file published with each release (<code>shasum -a 256 Dojix-macOS-unsigned.zip</code>), or build it from source.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">macOS asks for my login password to use the Keychain <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Because the app isn't signed with a developer certificate, macOS may ask the first time a new version reads its Keychain items (your API keys and the database key). Choose <strong>Always Allow</strong>.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">Pulse shows no live prices <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Check these:
+                    <ul>
+                        <li>Live prices are optional: make sure a data source is chosen and its API key entered in Settings</li>
+                        <li>Make sure you're connected to the internet</li>
+                        <li>Twelve Data's free tier allows 800 requests/day; if you've hit the limit, prices resume the next day</li>
+                        <li>Forex prices only move while the market is open (Sunday evening to Friday evening, New York time)</li>
+                    </ul>
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="false">I found a bug or have an idea <span class="arrow">&#9662;</span></div>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Please <a href="https://github.com/djctwo/dojix/issues">open an issue on GitHub</a> with what you expected, what happened, the steps to reproduce it, and your Dojix version (<strong>Dojix &gt; About Dojix</strong>). If a file triggers the bug, attach a small fictional version of it.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="contact-card">
+            <h2>Still need help?</h2>
+            <p>Questions, bugs and ideas go to GitHub Issues. Please never paste real trades, account numbers or API keys.</p>
+            <a href="https://github.com/djctwo/dojix/issues" class="contact-link">Open a GitHub issue</a>
+            <p class="response-time">Security problem? <a href="https://github.com/djctwo/dojix/security">Report it privately</a>.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">License</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+            </div>
+            <p>&copy; 2026 Douglas Cleary. Dojix is free software under the GNU GPL v3.0.</p>
+            <p>Created by <a href="https://github.com/djctwo">Douglas Cleary</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(q) {
+            var item = q.parentElement;
+            var answer = item.querySelector('.faq-answer');
+            var isOpen = item.classList.contains('open');
+
+            // Close all other items
+            document.querySelectorAll('.faq-item.open').forEach(function(other) {
+                if (other !== item) {
+                    other.classList.remove('open');
+                    other.querySelector('.faq-answer').style.maxHeight = null;
+                    other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            if (isOpen) {
+                item.classList.remove('open');
+                answer.style.maxHeight = null;
+                q.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                q.setAttribute('aria-expanded', 'true');
+            }
+        }
+        document.querySelectorAll('.faq-question').forEach(function(q) {
+            q.addEventListener('click', function() { toggleFaq(this); });
+            q.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(this); }
+            });
+        });
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is Dojix?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dojix is a free, open-source trade journal for forex traders on the Mac. Import your trade history and it gives you a journal, more than 60 analytics, and an Edge Report that ranks the sessions, hours, days and pairs that help or hurt you, in dollars. Your trades never leave your Mac."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Dojix free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Every feature is available to everyone. Nothing is locked and nothing expires. Dojix is free software under the GNU GPL v3.0, and the source code is on GitHub at github.com/djctwo/dojix."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Where is my data stored?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In ~/Library/Application Support/Dojix/ on your Mac. The journal is encrypted on disk with AES-256-GCM. There is no account, no cloud sync and no telemetry."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I import my trades?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dojix imports MetaTrader 5 (StrategyAnalytics CSV), MetaTrader 4, cTrader, TradingView, OANDA (CSV or API), Interactive Brokers, thinkorswim, NinjaTrader, and any other CSV through a column-mapping screen. Drag and drop your file onto the Import screen."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What macOS version do I need?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "macOS 14 Sonoma or later. A Windows version is coming soon."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "macOS says Dojix can't be opened. What do I do?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dojix is not signed with an Apple Developer ID or notarized. Right-click Dojix.app, choose Open, then click Open again. If there is no Open button, try to open it once, then go to System Settings > Privacy & Security and click Open Anyway."
+            }
+        }
+    ]
+}
+    </script>
+</body>
+</html>

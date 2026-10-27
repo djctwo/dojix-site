@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy - Dojix</title>
+    <meta name="description" content="Dojix privacy: your trade data stays on your Mac, encrypted. No account, no telemetry, no cloud. Optional online features run only with your own keys.">
+    <link rel="canonical" href="https://dojix.app/privacy/">
+    <meta property="og:title" content="Privacy - Dojix">
+    <meta property="og:description" content="Your trade data stays on your Mac, encrypted. No account, no telemetry, no cloud.">
+    <meta property="og:url" content="https://dojix.app/privacy/">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#0e0d0b;--surface:#141310;--card:#1c1b18;--border:rgba(255,220,160,0.08);--border-strong:rgba(255,220,160,0.14);--text:#e8e4dc;--muted:#9a9488;--accent:#e8b44c;--accent-hover:#f0c060; }
+        * { margin:0;padding:0;box-sizing:border-box; }
+        body { font-family:'DM Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased; }
+        .container { max-width:720px;margin:0 auto;padding:0 24px; }
+        nav { padding:20px 0;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(14,13,11,0.92);backdrop-filter:blur(20px);z-index:100; }
+        nav .container { max-width:1080px;display:flex;justify-content:space-between;align-items:center; }
+        .logo { font-size:22px;font-weight:700;letter-spacing:-0.5px;text-decoration:none;color:var(--text); }
+        .logo span { color:var(--accent); }
+        .logo img { width:28px;height:28px;vertical-align:middle;margin-right:8px;border-radius:6px; }
+        nav a { color:var(--muted);text-decoration:none;margin-left:32px;font-size:14px;font-weight:500;transition:color 0.2s; }
+        nav a:hover { color:var(--text); }
+        .hamburger { display:none;background:none;border:none;cursor:pointer;padding:8px; }
+        .hamburger svg { width:22px;height:22px;stroke:var(--text); }
+        .nav-links { display:flex;align-items:center; }
+        .btn-download { display:inline-block;padding:8px 20px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;background:var(--accent);color:var(--bg);transition:all 0.2s; }
+        .btn-download:hover { background:var(--accent-hover);transform:translateY(-1px); }
+        h1 { font-size:36px;font-weight:700;margin:60px 0 8px;letter-spacing:-1px; }
+        .updated { color:var(--muted);font-size:14px;margin-bottom:40px; }
+        h2 { font-size:22px;font-weight:600;margin:40px 0 12px;color:var(--accent); }
+        h3 { font-size:17px;font-weight:600;margin:24px 0 8px; }
+        p, li { font-size:15px;color:var(--muted);margin-bottom:12px; }
+        ul { padding-left:20px; }
+        li { margin-bottom:8px; }
+        strong { color:var(--text); }
+        table { width:100%;border-collapse:collapse;margin:16px 0;font-size:14px; }
+        th { text-align:left;padding:8px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:500; }
+        td { padding:8px;border-bottom:1px solid var(--border);color:var(--muted); }
+        a { color:var(--accent); }
+        hr { border:none;border-top:1px solid var(--border);margin:32px 0; }
+        footer { border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:13px;margin-top:80px; }
+        footer a { color:var(--muted);text-decoration:none;margin:0 12px; }
+        footer a:hover { color:var(--text); }
+        footer p a { margin:0;text-decoration:underline; }
+        .footer-links { margin-bottom:16px; }
+        code { font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);overflow-wrap:anywhere; }
+        .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
+        .skip-link { position:absolute;top:-100%;left:16px;background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:0 0 8px 8px;font-weight:600;z-index:200;text-decoration:none; }
+        .skip-link:focus { top:0; }
+        :focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+        @media (prefers-reduced-motion:reduce) {
+            *,*::before,*::after { animation-duration:0.01ms !important;transition-duration:0.01ms !important; }
+        }
+        @media (max-width:600px) {
+            .hamburger { display:block; }
+            .nav-links { display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:12px; }
+            .nav-links.open { display:flex; }
+            .nav-links a { margin-left:0;font-size:15px; }
+            .nav-links .btn-download { text-align:center;margin-top:4px; }
+            nav .container { position:relative; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download" style="padding:8px 20px;font-size:14px;">Download</a>
+            </div>
+        </div>
+    </nav>
+    <main id="main" class="container">
+        <h1>Privacy</h1>
+        <p class="updated">Last updated: October 27, 2026</p>
+
+        <p>Dojix is a free, open-source Mac app. It has no servers, no accounts and no analytics. <strong>Your trading data stays on your Mac.</strong> This page explains exactly what the app stores, what it can send over the network, and when. Because the source code is public, you can <a href="https://github.com/djctwo/dojix">check every statement here yourself</a>.</p>
+
+        <h2>1. What stays on your Mac</h2>
+        <ul>
+            <li><strong>Your journal</strong> &mdash; your trades, notes, tags, emotions and checklists are kept in a local database in <code>~/Library/Application Support/Dojix/</code>. It is encrypted on disk with AES-256-GCM, and so are your trade screenshots. The decrypted journal exists only in memory while Dojix runs.</li>
+            <li><strong>The encryption key</strong> &mdash; kept in your macOS Keychain. With App Lock on, the key is sealed with your password (PBKDF2-SHA256, 600,000 iterations), so the journal can't be decrypted without it.</li>
+            <li><strong>API keys you add</strong> &mdash; for optional online features, stored in your macOS Keychain.</li>
+            <li><strong>Preferences</strong> &mdash; your watchlist, trading checklist and display settings are kept in Dojix's ordinary preferences file, which is not encrypted.</li>
+        </ul>
+
+        <h2>2. What Dojix does not do</h2>
+        <ul>
+            <li>No account, no sign-up, no subscription</li>
+            <li>No telemetry, usage analytics or crash reporting</li>
+            <li>No cloud sync and no server that receives your data</li>
+            <li>No ads, and nothing to sell</li>
+            <li>No automatic update checks &mdash; new versions are published on <a href="https://github.com/djctwo/dojix/releases">GitHub Releases</a></li>
+        </ul>
+
+        <h2>3. Optional online features</h2>
+        <p>Dojix works fully offline. The features below are off by default and run only if you add your own key in Settings. Any usage is billed by that provider to you. Data goes directly from your Mac to the provider over HTTPS; nothing passes through anyone else.</p>
+        <table>
+            <caption class="sr-only">Optional online features and the data each one sends</caption>
+            <thead><tr><th>Feature</th><th>Provider</th><th>What is sent</th></tr></thead>
+            <tbody>
+                <tr><td><strong>AI recommendations</strong> (Edge Report &gt; Run Analysis)</td><td>Anthropic</td><td>A summary of your statistics, only when you click (see 3a)</td></tr>
+                <tr><td><strong>Live prices</strong></td><td>Twelve Data, Polygon.io or OANDA</td><td>The currency pairs on your watchlist, with your key</td></tr>
+                <tr><td><strong>Live prices from MetaTrader 5</strong></td><td>None (local file)</td><td>Nothing; Dojix reads a price file on your Mac</td></tr>
+                <tr><td><strong>OANDA import</strong></td><td>OANDA</td><td>Your OANDA token and account ID, to fetch your own trade history</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3a. AI recommendations &mdash; what is sent to Anthropic</h3>
+        <p>If you add your own Anthropic API key and click <strong>Run Analysis</strong> in the Edge Report, Dojix sends a summary of your statistics: totals, and P&amp;L and win rate by session, hour, day, pair, bias and volatility.</p>
+        <p><strong>Never sent:</strong> individual trades, ticket numbers, notes, screenshots, or your name. Nothing is sent without your key and your click. Anthropic's handling of API requests is covered by <a href="https://www.anthropic.com/legal/privacy" rel="noopener">Anthropic's privacy policy</a>.</p>
+
+        <h3>3b. Economic calendar</h3>
+        <p>The economic calendar in Pulse downloads the public weekly calendar from <code>nfs.faireconomy.media</code>. No key is used and nothing about you is sent beyond the ordinary web request.</p>
+
+        <h2>4. Security</h2>
+        <ul>
+            <li>Journal and trade screenshots encrypted on disk with AES-256-GCM</li>
+            <li>Optional App Lock with idle auto-lock; it also locks when the Mac sleeps, the screen locks, or you hide or minimize Dojix</li>
+            <li>Password-protected backups (AES-256-GCM, PBKDF2-SHA256 with 600,000 iterations); a backup without a password is not encrypted</li>
+            <li>Every connection uses HTTPS</li>
+        </ul>
+        <p>Exports you create (CSV, PDF, backups without a password) are not encrypted. The full security model is in <a href="https://github.com/djctwo/dojix/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+
+        <h2>5. Your control</h2>
+        <p>Your data is local, so you control it directly: export it (CSV/PDF), back it up and restore it, or delete everything at any time. Deleting your data on your Mac deletes it everywhere, because there is no other copy.</p>
+
+        <h2>6. This website</h2>
+        <p>dojix.app is a static site hosted on GitHub Pages. It uses no cookies, no analytics and no tracking scripts, and has no forms. Like any website, the host (GitHub) receives standard request data such as your IP address, and the page loads its fonts from Google Fonts, which receives the same. Downloads and the source code are on GitHub, where GitHub's own privacy statement applies.</p>
+
+        <h2>7. Changes</h2>
+        <p>If the app's behavior changes, this page and the repository's README will be updated, and the date at the top will change.</p>
+
+        <h2>8. Contact</h2>
+        <p>Questions: open an issue at <a href="https://github.com/djctwo/dojix/issues">github.com/djctwo/dojix/issues</a>. Please never post real trades, account numbers or API keys there.<br>
+        Security problems: report them privately through <a href="https://github.com/djctwo/dojix/security">the repository's private vulnerability reporting</a>.</p>
+    </main>
+    <footer>
+        <div class="container" style="max-width:1080px;">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">License</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+            </div>
+            <p>&copy; 2026 Douglas Cleary. Dojix is free software under the GNU GPL v3.0.</p>
+            <p>Created by <a href="https://github.com/djctwo">Douglas Cleary</a></p>
+        </div>
+    </footer>
+</body>
+</html>

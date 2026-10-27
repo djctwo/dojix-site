@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Dojix, the Free Trade Journal for Mac</title>
+    <meta name="description" content="Explore Dojix, a free, open-source trade journal for Mac: more than 60 analytics, an Edge Report in dollars, trade grading, session intelligence and imports from 9 formats.">
+    <meta name="theme-color" content="#0e0d0b">
+    <link rel="canonical" href="https://dojix.app/features/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dojix.app/features/">
+    <meta property="og:title" content="Features - Dojix, the Free Trade Journal for Mac">
+    <meta property="og:description" content="More than 60 analytics, an Edge Report in dollars and live session intelligence. Free and open source.">
+    <meta property="og:image" content="https://dojix.app/images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="/images/sample-journal.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0d0b;
+            --surface: #141310;
+            --card: #1c1b18;
+            --border: rgba(255,220,160,0.08);
+            --border-strong: rgba(255,220,160,0.14);
+            --text: #e8e4dc;
+            --muted: #9a9488;
+            --accent: #e8b44c;
+            --accent-dim: rgba(232,180,76,0.1);
+            --accent-hover: #f0c060;
+            --green: #5cc98a;
+            --red: #e06050;
+            --blue: #6ba3d9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: var(--accent); color: var(--bg); padding: 8px 16px; border-radius: 0 0 8px 8px; font-weight: 600; z-index: 200; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn:focus-visible { outline-offset: 3px; }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(14,13,11,0.92);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-decoration: none; color: var(--text); }
+        .logo span { color: var(--accent); }
+        .logo img { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; border-radius: 6px; }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 32px; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--text); }
+        nav a.active { color: var(--text); }
+
+        /* Page header */
+        .page-header { padding: 80px 0 32px; text-align: center; }
+        .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+        h1 { font-size: 44px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+        .page-subtitle { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+        /* Sticky feature TOC */
+        .feature-toc {
+            position: sticky;
+            top: 68px;
+            z-index: 50;
+            background: rgba(14,13,11,0.92);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .toc-pills {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 24px;
+        }
+        .toc-pill {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .toc-pill:hover { color: var(--text); border-color: var(--border-strong); }
+        .toc-pill.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+        /* Highlight badges */
+        .exclusive-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 0 48px;
+            text-align: center;
+        }
+        .exclusive-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(92,201,138,0.08);
+            border: 1px solid rgba(92,201,138,0.2);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--green);
+        }
+        .exclusive-strip-label {
+            width: 100%;
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* Screenshot showcases */
+        .showcase { display: flex; align-items: center; gap: 48px; padding: 80px 0; scroll-margin-top: 140px; }
+        .showcase.reverse { flex-direction: row-reverse; }
+        .showcase-text { flex: 1; min-width: 280px; }
+        .showcase-text h2 { font-size: 28px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.5px; }
+        .showcase-text p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+        .showcase-text ul { list-style: none; margin-top: 16px; }
+        .showcase-text ul li { padding: 6px 0; font-size: 14px; color: var(--muted); }
+        .showcase-text ul li::before { content: '\2713  '; color: var(--green); font-weight: 700; }
+        .showcase-image { flex: 1.4; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-strong); }
+        .showcase-image img { width: 100%; height: auto; display: block; cursor: pointer; }
+
+        /* Hero showcase — top differentiators get bigger treatment */
+        .showcase.hero-showcase {
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 48px;
+            margin-bottom: 24px;
+            border-top: 2px solid var(--accent);
+        }
+        .showcase.hero-showcase .showcase-image { border-color: var(--accent); border-width: 1px; }
+        .hero-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(232,180,76,0.2);
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        /* Text-only showcases (no screenshot) */
+        .showcase.text-only { display: block; padding: 56px 0; }
+        .showcase.text-only .showcase-text { max-width: 760px; }
+        .showcase.text-only ul { columns: 2; column-gap: 32px; }
+        .showcase.text-only ul li { break-inside: avoid; }
+        .showcase.hero-showcase.text-only { padding: 40px 48px; }
+        .shot-note { text-align: center; font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+
+        /* Divider */
+        .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        /* Showcase groups — visual differentiation */
+        .showcase-group {
+            padding: 32px 0 16px;
+        }
+        .showcase-group.alt-bg {
+            background: var(--surface);
+            margin-left: -24px;
+            margin-right: -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .showcase-group.alt-bg .showcase.hero-showcase {
+            background: var(--card);
+        }
+        .group-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            padding: 24px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .group-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .group-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 0;
+        }
+
+        /* Analytics deep dive */
+        .analytics-section { padding: 80px 0; scroll-margin-top: 140px; }
+        .analytics-section h2 { font-size: 32px; text-align: center; margin-bottom: 12px; }
+        .analytics-desc { font-size: 16px; color: var(--muted); text-align: center; max-width: 500px; margin: 0 auto 48px; }
+        .category-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin: 40px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .category-label:first-of-type { margin-top: 0; }
+        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .analytics-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+        .analytics-card:hover { border-color: var(--border-strong); }
+        .analytics-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .analytics-card p { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+        /* Import platforms */
+        .import-section { padding: 60px 0 80px; text-align: center; scroll-margin-top: 140px; }
+        .import-section h2 { font-size: 28px; margin-bottom: 12px; }
+        .import-section p { color: var(--muted); margin-bottom: 32px; }
+        .platform-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .platform-badge {
+            padding: 10px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: border-color 0.2s;
+        }
+        .platform-badge:hover { border-color: var(--border-strong); }
+        .import-note { font-size: 14px; color: var(--muted); }
+
+        /* CTA */
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border-strong); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        .btn-download { background: var(--accent); color: var(--bg); }
+        .btn-download:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .bottom-cta .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .bottom-cta { text-align: center; padding: 60px 0 100px; }
+        .bottom-cta h2 { font-size: 32px; margin-bottom: 16px; }
+        .bottom-cta p { color: var(--muted); margin-bottom: 32px; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
+        footer a { color: var(--muted); text-decoration: none; margin: 0 12px; }
+        footer a:hover { color: var(--text); }
+        footer p a { margin: 0; text-decoration: underline; }
+        .footer-links { margin-bottom: 16px; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
+        .lightbox-close {
+            position: fixed; top: 20px; right: 24px; z-index: 1001;
+            background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+            color: #fff; font-size: 20px; width: 44px; height: 44px; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            transition: border-color 0.2s;
+        }
+        .lightbox-close:hover { border-color: rgba(255,255,255,0.5); }
+        .lightbox.active + .lightbox-close { display: flex; }
+
+        @media (max-width: 1024px) {
+            .analytics-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-toc { top: 62px; }
+        }
+        @media (max-width: 768px) {
+            .showcase, .showcase.reverse { flex-direction: column; }
+            .showcase.hero-showcase { padding: 32px 24px; }
+            .analytics-grid { grid-template-columns: 1fr; }
+            .toc-pills { gap: 6px; }
+            .toc-pill { font-size: 12px; padding: 5px 12px; }
+            .showcase-group.alt-bg { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+            .feature-toc { position: relative; top: 0; }
+            .showcase.text-only ul { columns: 1; }
+            .showcase.hero-showcase.text-only { padding: 32px 24px; }
+        }
+        /* Hamburger */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger svg { width: 22px; height: 22px; stroke: var(--text); }
+        .nav-links { display: flex; align-items: center; }
+
+        @media (max-width: 600px) {
+            .page-header { padding: 48px 0 24px; }
+            h1 { font-size: 32px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 12px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin-left: 0; font-size: 15px; }
+            .nav-links .btn-download { text-align: center; margin-top: 4px; }
+            nav .container { position: relative; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><img src="/images/apple-touch-icon.png" alt="" width="28" height="28">dojix<span>.</span></a>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="nav-links">
+                <a href="/features/" class="active">Features</a>
+                <a href="/support/">Support</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download" style="padding:8px 20px;font-size:14px;">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main" class="container">
+        <div class="page-header">
+            <div class="section-label">Features</div>
+            <h1>See Dojix in action</h1>
+            <p class="page-subtitle">Every screen is built for one job: showing you where you make money and where you lose it. Every feature is free and open source.</p>
+        </div>
+
+        <!-- Highlight badges -->
+        <div class="exclusive-strip">
+            <span class="exclusive-badge">Monte Carlo</span>
+            <span class="exclusive-badge">Kill Zones</span>
+            <span class="exclusive-badge">Risk of Ruin</span>
+            <span class="exclusive-badge">Edge Report</span>
+            <span class="exclusive-badge">Trade Grading A-F</span>
+            <span class="exclusive-badge">Session Intelligence</span>
+            <span class="exclusive-badge">Behavioral Scoring</span>
+            <span class="exclusive-badge">Event Impact</span>
+            <div class="exclusive-strip-label">All included in every copy, free</div>
+        </div>
+
+    <!-- Sticky TOC -->
+    <div class="feature-toc">
+        <div class="toc-pills">
+            <a href="#journal" class="toc-pill">Journal</a>
+            <a href="#edge" class="toc-pill">Edge Report</a>
+            <a href="#pulse" class="toc-pill">Pulse</a>
+            <a href="#montecarlo" class="toc-pill">Monte Carlo</a>
+            <a href="#timing" class="toc-pill">Timing</a>
+            <a href="#sessions" class="toc-pill">Sessions</a>
+            <a href="#pairs" class="toc-pill">Pairs</a>
+            <a href="#behavioral" class="toc-pill">Behavioral</a>
+            <a href="#risk" class="toc-pill">Risk</a>
+            <a href="#import" class="toc-pill">Import</a>
+            <a href="#analytics" class="toc-pill">All 60+</a>
+        </div>
+    </div>
+
+        <p class="shot-note">Screenshots show the built-in sample trades. Every number in them is made up.</p>
+
+        <!-- Group: Record & Analyze -->
+        <div class="showcase-group">
+        <div class="group-header">Record & Analyze <span class="group-count">01–02</span></div>
+
+        <!-- 1. Journal -->
+        <div class="showcase" id="journal">
+            <div class="showcase-image">
+                <img src="/images/sample-journal.png" alt="Trade journal with sample trades showing pair, direction, lots, P&L, cumulative P&L, R-multiple, A-F grade and session" loading="eager" width="1600" height="1066" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <h2>Trade Journal</h2>
+                <p>Every trade with pair, direction, size, P&L, R-multiple, MAE/MFE, session and hour. Add notes, tags, emotions, checklists, commission and swap, and screenshots.</p>
+                <ul>
+                    <li>Auto-graded A-F on R-multiple, execution, timing and management</li>
+                    <li>Search, filter and sort by pair, session, direction and date range</li>
+                    <li>Cumulative P&L column shows your equity curve inline</li>
+                    <li>Trade replay with play/pause and running stats</li>
+                    <li>Export to PDF or CSV</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. Edge Report -->
+        <div class="showcase reverse" id="edge">
+            <div class="showcase-image">
+                <img src="/images/sample-edge-report.png" alt="Edge Report with sample trades ranking where you make and lose money by session and hour" loading="lazy" width="1600" height="1066" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <h2>Edge Report</h2>
+                <p>Ranks your top 5 places to make and lose money by session, hour, day and pair, with dollar amounts on each one. Export it as PDF or CSV.</p>
+                <ul>
+                    <li>Bias-alignment and volatility breakdowns</li>
+                    <li>Tag analytics for your own setups</li>
+                    <li>Post-close continuation analysis</li>
+                    <li>What to Cut advisor: what's costing you, with numbers</li>
+                    <li>Optional AI recommendations with your own Anthropic API key: 3-5 ranked suggestions with dollar estimates, from summary statistics only, and only when you click Run Analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        </div><!-- /group: Record & Analyze -->
+
+        <!-- Group: Live Intelligence -->
+        <div class="showcase-group alt-bg">
+        <div class="group-header">Live Intelligence <span class="group-count">03</span></div>
+
+        <!-- 3. Pulse -->
+        <div class="showcase" id="pulse">
+            <div class="showcase-image">
+                <img src="/images/sample-pulse.png" alt="Pulse view with live session clock and session conditions based on the sample trades" loading="lazy" width="1600" height="1066" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <h2>Pulse &mdash; Live Session Intelligence</h2>
+                <p>A live session clock with time remaining, an economic calendar with "danger zones" around big news, and a signal that tells you whether the session that's open matches your best history.</p>
+                <ul>
+                    <li>Session intelligence: FOCUS / OK / REDUCE / AVOID</li>
+                    <li>Danger zones before high-impact news</li>
+                    <li>Weekly economic calendar</li>
+                    <li>Currency strength bars</li>
+                    <li>Optional live prices from Twelve Data, Polygon.io, OANDA, or MetaTrader 5 directly (no key needed)</li>
+                </ul>
+            </div>
+        </div>
+
+        </div><!-- /group: Live Intelligence -->
+
+        <!-- Group: Risk & Timing -->
+        <div class="showcase-group">
+        <div class="group-header">Risk & Timing <span class="group-count">04–06</span></div>
+
+        <!-- 4. Monte Carlo — HERO SHOWCASE -->
+        <div class="showcase hero-showcase text-only" id="montecarlo">
+            <div class="showcase-text">
+                <span class="hero-tag">Risk analysis</span>
+                <h2>Monte Carlo &amp; Risk of Ruin</h2>
+                <p>Run 1,000 randomized simulations of your trade history. See your probability of hitting a target and your risk of blowing the account.</p>
+                <ul>
+                    <li>1,000 simulated equity curves with 5th-95th percentile bands</li>
+                    <li>Probability of profit, target hit and drawdown</li>
+                    <li>Risk of Ruin with the Kelly criterion</li>
+                    <li>Exit efficiency: how much you leave on the table</li>
+                    <li>Commission &amp; swap cost tracking by symbol</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Timing -->
+        <div class="showcase reverse" id="timing">
+            <div class="showcase-image">
+                <img src="/images/sample-analytics.png" alt="Analytics Timing tab with sample trades: P&L calendar, P&L by hour, P&L by day and duration analysis" loading="lazy" width="1600" height="1066" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <h2>Timing Analytics</h2>
+                <p>When do you trade best? A P&L calendar, hourly and day-of-week breakdowns, and duration analysis show when your edge is sharpest.</p>
+                <ul>
+                    <li>Trade calendar with daily P&L</li>
+                    <li>Hourly P&L chart: see which hours pay you</li>
+                    <li>Day-of-week breakdown</li>
+                    <li>Duration analysis: are you holding too long or cutting too short?</li>
+                    <li>Trade time heatmap: hour vs. day grid</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. Sessions — HERO SHOWCASE -->
+        <div class="showcase hero-showcase text-only" id="sessions">
+            <div class="showcase-text">
+                <span class="hero-tag">Timing edge</span>
+                <h2>Sessions &amp; Kill Zones</h2>
+                <p>See P&L by session and hour, find your most profitable time windows, and understand your win/loss streaks.</p>
+                <ul>
+                    <li>Session heatmap: P&L by hour and day of week</li>
+                    <li>Kill Zone Optimizer: your most profitable time windows</li>
+                    <li>Session intelligence with per-session edge signals</li>
+                    <li>Sequence analysis: win/loss streak patterns</li>
+                    <li>Streak timeline: see momentum shifts</li>
+                </ul>
+            </div>
+        </div>
+
+        </div><!-- /group: Risk & Timing -->
+
+        <!-- Group: Deep Insights -->
+        <div class="showcase-group alt-bg">
+        <div class="group-header">Deep Analysis <span class="group-count">07–09</span></div>
+
+        <!-- 7. Pairs -->
+        <div class="showcase text-only" id="pairs">
+            <div class="showcase-text">
+                <h2>Pair &amp; Instrument Analytics</h2>
+                <p>What you trade and how: win/loss distributions, per-pair metrics, directional bias, lot sizing patterns and correlation.</p>
+                <ul>
+                    <li>Win/loss distribution with R-multiple histogram</li>
+                    <li>Per-pair analytics: win rate, average P&L, trade count</li>
+                    <li>Directional edge: long vs. short performance</li>
+                    <li>Lot size analysis: are you sizing up after losses?</li>
+                    <li>Pair correlation matrix</li>
+                    <li>MAE/MFE and slippage analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. Behavioral -->
+        <div class="showcase text-only" id="behavioral">
+            <div class="showcase-text">
+                <h2>Behavioral Analytics</h2>
+                <p>Know your discipline score, your consistency score, and whether you're improving or slipping.</p>
+                <ul>
+                    <li>Discipline Score (A-F): overtrading, revenge, tilt, sizing</li>
+                    <li>Consistency Score: win rate stability, recovery, timing</li>
+                    <li>Trade grades: A-F distribution across your history</li>
+                    <li>Emotional P&L: Calm, Confident, Anxious, Frustrated, Revenge, FOMO, Bored</li>
+                    <li>Checklist compliance: dollar impact of following your rules</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9. Risk & Growth -->
+        <div class="showcase text-only" id="risk">
+            <div class="showcase-text">
+                <h2>Risk &amp; Growth Projections</h2>
+                <p>Understand your drawdowns, project your account growth, and size positions from your actual numbers.</p>
+                <ul>
+                    <li>Drawdown recovery: time underwater, depth, behavior during drawdown</li>
+                    <li>Growth projections with compounding scenarios</li>
+                    <li>Position sizer based on your own risk metrics</li>
+                    <li>Sharpe and Calmar ratios, benchmark comparison</li>
+                    <li>Event Impact Profiler: how NFP, FOMC, CPI, ECB and BOE days affect your P&L</li>
+                </ul>
+            </div>
+        </div>
+
+        </div><!-- /group: Deep Analysis -->
+
+        <!-- Group: Connect -->
+        <div class="showcase-group">
+        <div class="group-header">Connect <span class="group-count">10</span></div>
+
+        <!-- 10. Import -->
+        <div class="showcase reverse" id="import">
+            <div class="showcase-image">
+                <img src="/images/sample-import.png" alt="Import view with drag-and-drop area and the supported platforms" loading="lazy" width="1600" height="1066" onclick="openLightbox(this)">
+            </div>
+            <div class="showcase-text">
+                <h2>Import from the platforms you use</h2>
+                <p>Drag and drop a CSV and Dojix detects the format, or import from OANDA through its API. Re-importing the same file never creates duplicates.</p>
+                <ul>
+                    <li>MetaTrader 5 (StrategyAnalytics CSV), with automatic import from your MT5 files folder</li>
+                    <li>MetaTrader 4, cTrader, TradingView, NinjaTrader</li>
+                    <li>OANDA, by CSV or API</li>
+                    <li>Interactive Brokers, thinkorswim</li>
+                    <li>Any other CSV through a column-mapping screen</li>
+                </ul>
+            </div>
+        </div>
+
+        </div><!-- /group: Connect -->
+
+        <!-- Analytics deep dive -->
+        <section class="analytics-section" id="analytics">
+            <div class="section-label" style="text-align:center;">Analytics</div>
+            <h2>More than 60 analytics</h2>
+            <p class="analytics-desc">Each one answers a question about your trading. An Essential view shows only the core set.</p>
+            <button class="analytics-toggle btn btn-secondary" onclick="toggleAnalytics()" id="analytics-toggle" style="margin-bottom:32px;padding:10px 24px;font-size:14px;">Show the analytics</button>
+
+            <div id="analytics-content" style="display:none;">
+            <div class="category-label">Core Analytics</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Equity Curve &amp; Returns</h3>
+                    <p>Equity curve with drawdown, monthly returns, cumulative P&L tracking.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Sharpe &amp; Calmar</h3>
+                    <p>Risk-adjusted return ratios and a benchmark comparison. See whether your returns justify the risk you're taking.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Drawdown Recovery</h3>
+                    <p>Time underwater, the deepest drawdowns, and how you trade during drawdown vs. recovery.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Win/Loss Distribution</h3>
+                    <p>Histogram of trade outcomes with R-multiple buckets. See the shape of your edge and spot outlier winners and losers.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Commission &amp; Fee Tracking</h3>
+                    <p>Total costs, cost per trade, cost by symbol. Know what your broker is really charging you.</p>
+                </div>
+            </div>
+
+            <div class="category-label">Timing &amp; Sessions</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Session Heatmap</h3>
+                    <p>P&L by hour and day of week in a grid. See where your edge concentrates.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Kill Zone Optimizer</h3>
+                    <p>Groups adjacent profitable hours into windows to trade and windows to avoid, with a monthly P&L projection.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Hourly P&L Chart</h3>
+                    <p>P&L per trading hour (UTC). See which hours pay you and which cost you.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Day-of-Week Analysis</h3>
+                    <p>P&L broken down by Monday through Friday. Find your best and worst days.</p>
+                </div>
+            </div>
+
+            <div class="category-label">Behavioral</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Discipline Score (A-F)</h3>
+                    <p>A composite score across overtrading, revenge trading, tilt, and lot size increases after losses.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Consistency Score</h3>
+                    <p>Win rate stability over time, recovery from drawdowns, timing consistency. Are you getting better or worse?</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Emotional P&L</h3>
+                    <p>Tag trades with your emotional state (Calm, Confident, Anxious, Frustrated, Revenge, FOMO, Bored) and see P&L per emotion.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Checklist Compliance</h3>
+                    <p>Define your trading rules and check them per trade. See the dollar impact of following vs. breaking them.</p>
+                </div>
+            </div>
+
+            <div class="category-label">Risk &amp; Projections</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Monte Carlo Simulation</h3>
+                    <p>1,000 randomized equity curves with 5th/25th/median/75th/95th percentile bands and the probability of hitting a profit target.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Risk of Ruin (Kelly)</h3>
+                    <p>Kelly criterion and a risk gauge: your mathematical probability of blowing the account.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Growth Projections</h3>
+                    <p>Project account growth from your current metrics with adjustable compounding assumptions.</p>
+                </div>
+            </div>
+
+            <div class="category-label">Edge &amp; Events</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>AI Recommendations (optional)</h3>
+                    <p>With your own Anthropic API key, the Edge Report writes 3-5 ranked recommendations with dollar estimates. Only summary statistics are sent, never individual trades or notes, and only when you click Run Analysis.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Event Impact Profiler</h3>
+                    <p>Performance by event type (NFP, FOMC, CPI, ECB, BOE): win rate, average P&L and a TRADE / CAUTION / AVOID call per event.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>What to Cut Advisor</h3>
+                    <p>Finds what's costing you money and how much, with a dollar amount on every item.</p>
+                </div>
+            </div>
+
+            <div class="category-label">And More</div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Prop Firm Tracker</h3>
+                    <p>Set account size, profit target, daily loss limit and max drawdown, and track any prop-firm challenge with progress bars.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Playbook Catalog</h3>
+                    <p>Tag-based setup tracking with per-setup metrics: keep, review or drop each setup.</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Plus many more</h3>
+                    <p>Pair correlation, exit efficiency, sequence analysis, directional edge, slippage, MAE/MFE, edge decay, time to MFE, net currency exposure, strategy checkpoints and more.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- Import platforms -->
+        <section class="import-section">
+            <h2>Import from anywhere</h2>
+            <p>Drag and drop a CSV. Dojix detects the format.</p>
+            <div class="platform-grid">
+                <span class="platform-badge">MT5</span>
+                <span class="platform-badge">MT4</span>
+                <span class="platform-badge">cTrader</span>
+                <span class="platform-badge">OANDA (CSV or API)</span>
+                <span class="platform-badge">TradingView</span>
+                <span class="platform-badge">Interactive Brokers</span>
+                <span class="platform-badge">thinkorswim</span>
+                <span class="platform-badge">NinjaTrader</span>
+                <span class="platform-badge">Generic CSV</span>
+            </div>
+            <p class="import-note">Don't see your platform? The generic CSV importer with column mapping handles other formats.</p>
+        </section>
+
+        <!-- Bottom CTA -->
+        <div class="bottom-cta">
+            <h2>Ready to find your edge?</h2>
+            <p>Free and open source (GPL-3.0). macOS 14 or later. No account needed. Windows version coming soon.</p>
+            <div class="cta-group">
+                <a href="https://github.com/djctwo/dojix/releases/latest" class="btn btn-download" style="font-size:18px;padding:16px 48px;">Download for Mac</a>
+                <a href="https://github.com/djctwo/dojix" class="btn btn-secondary" style="font-size:18px;padding:16px 48px;">View on GitHub</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/features/">Features</a>
+                <a href="/support/">Support</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">License</a>
+                <a href="https://github.com/djctwo/dojix">GitHub</a>
+            </div>
+            <p>&copy; 2026 Douglas Cleary. Dojix is free software under the GNU GPL v3.0.</p>
+            <p>Created by <a href="https://github.com/djctwo">Douglas Cleary</a></p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-label="Image preview">
+        <img id="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image preview">&times;</button>
+    <script>
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.src;
+            document.getElementById('lightbox-img').alt = el.alt;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Collect all lightbox-able images for arrow navigation
+        var lbImages = Array.from(document.querySelectorAll('img[onclick*="openLightbox"]'));
+        var lbIndex = -1;
+        document.addEventListener('keydown', function(e) {
+            var lb = document.getElementById('lightbox');
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') { closeLightbox(); return; }
+            if (e.key === 'ArrowRight' && lbIndex < lbImages.length - 1) {
+                lbIndex++;
+                document.getElementById('lightbox-img').src = lbImages[lbIndex].src;
+                document.getElementById('lightbox-img').alt = lbImages[lbIndex].alt;
+            }
+            if (e.key === 'ArrowLeft' && lbIndex > 0) {
+                lbIndex--;
+                document.getElementById('lightbox-img').src = lbImages[lbIndex].src;
+                document.getElementById('lightbox-img').alt = lbImages[lbIndex].alt;
+            }
+        });
+        // Track which image opened the lightbox
+        var origOpen = openLightbox;
+        openLightbox = function(el) {
+            lbIndex = lbImages.indexOf(el);
+            origOpen(el);
+        };
+
+        // Scroll-spy for TOC pills
+        (function() {
+            var pills = document.querySelectorAll('.toc-pill');
+            var sections = [];
+            pills.forEach(function(pill) {
+                var id = pill.getAttribute('href');
+                if (id && id.startsWith('#')) {
+                    var el = document.querySelector(id);
+                    if (el) sections.push({el: el, pill: pill});
+                }
+            });
+            function updateSpy() {
+                var scrollY = window.scrollY + 200;
+                var active = null;
+                sections.forEach(function(s) {
+                    if (s.el.offsetTop <= scrollY) active = s;
+                });
+                pills.forEach(function(p) { p.classList.remove('active'); });
+                if (active) active.pill.classList.add('active');
+            }
+            window.addEventListener('scroll', updateSpy, {passive: true});
+            updateSpy();
+        })();
+
+        function toggleAnalytics() {
+            var content = document.getElementById('analytics-content');
+            var btn = document.getElementById('analytics-toggle');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                btn.textContent = 'Collapse analytics grid';
+            } else {
+                content.style.display = 'none';
+                btn.textContent = 'Show the analytics';
+            }
+        }
+    </script>
+</body>
+</html>
